@@ -6,4 +6,8 @@ module com.grupo2.cinemautn {
 
     opens com.grupo2.cinemautn to javafx.fxml;
     exports com.grupo2.cinemautn;
+    exports com.grupo2.cinemautn.app;
+    opens com.grupo2.cinemautn.app to javafx.fxml;
+    exports com.grupo2.cinemautn.controllers;
+    opens com.grupo2.cinemautn.controllers to javafx.fxml;
 }
