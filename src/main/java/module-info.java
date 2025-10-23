@@ -3,6 +3,7 @@ module com.grupo2.cinemautn {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires org.json;
 
     opens com.grupo2.cinemautn to javafx.fxml;
     exports com.grupo2.cinemautn;
