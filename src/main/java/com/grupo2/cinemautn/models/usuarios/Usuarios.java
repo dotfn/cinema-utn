@@ -1,4 +1,4 @@
 package com.grupo2.cinemautn.models.usuarios;
 
-public class Usuario {
+public class Usuarios {
 }
