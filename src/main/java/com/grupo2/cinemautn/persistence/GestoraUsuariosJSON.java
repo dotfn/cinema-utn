@@ -1,5 +1,5 @@
 package com.grupo2.cinemautn.persistence;
-import com.grupo2.cinemautn.models.usuarios.Usuarios;
+import com.grupo2.cinemautn.models.usuarios.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class GestoraUsuariosJSON {
 
     //  SERIALIZAR
-    public void listaToArchivo(ArrayList<Usuarios> lista, String nombreArchivo) {
+    public void listaToArchivo(ArrayList<Usuario> lista, String nombreArchivo) {
         OperacionesLectoEscritura.grabar (nombreArchivo, serializarLista(lista));
 
     }
 
-    public JSONObject serializar(Usuarios u) {
+    public JSONObject serializar(Usuario u) {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject();
@@ -29,11 +29,11 @@ public class GestoraUsuariosJSON {
     }
 
 
-    public JSONArray serializarLista(ArrayList<Usuarios> lista) {
+    public JSONArray serializarLista(ArrayList<Usuario> lista) {
         JSONArray jsonArray = null;
         try {
             jsonArray = new JSONArray();
-            for (Usuarios u: lista) {
+            for (Usuario u: lista) {
                 jsonArray.put(serializar(u)); // agrega el JSONObject al JSONArray
             }
         } catch (JSONException e) {
@@ -44,9 +44,9 @@ public class GestoraUsuariosJSON {
 
     // DESERIALIZAR
 
-    public ArrayList<Usuarios> archivoALista(String nombreArchivo) {
+    public ArrayList<Usuario> archivoALista(String nombreArchivo) {
         JSONTokener tokener = OperacionesLectoEscritura.leer(nombreArchivo);
-        ArrayList<Usuarios> lista = null;
+        ArrayList<Usuario> lista = null;
         try {
             lista = deserializarLista(new JSONArray(tokener));
         } catch (JSONException e) {
@@ -56,8 +56,8 @@ public class GestoraUsuariosJSON {
         return lista;
     }
 
-    public Usuarios deserializar (JSONObject jsonObject) {
-        Usuarios u = new Usuarios();
+    public Usuario deserializar (JSONObject jsonObject) {
+        Usuario u = new Usuario();
         try {
             // TODO: completar con los atributos de Usuario
             //u.setNombre(jsonObject.getString("nombre"));
@@ -69,11 +69,11 @@ public class GestoraUsuariosJSON {
         return u;
     }
 
-    public ArrayList<Usuarios> deserializarLista (JSONArray jsonArray) {
-        ArrayList<Usuarios> lista = new ArrayList<>();
+    public ArrayList<Usuario> deserializarLista (JSONArray jsonArray) {
+        ArrayList<Usuario> lista = new ArrayList<>();
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
-                Usuarios u = deserializar(jsonArray.getJSONObject(i));
+                Usuario u = deserializar(jsonArray.getJSONObject(i));
                 lista.add(u);
             }
         } catch (JSONException e) {
