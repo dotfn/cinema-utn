@@ -60,6 +60,7 @@ public class UsuarioService {
     }
 
     public void listar(){
+        System.out.println("Lista de usuarios: ");
         for (Usuario u : usuarios) {
             System.out.println(u.toString());
         }

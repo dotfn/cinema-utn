@@ -115,6 +115,7 @@ public class Usuario {
         System.out.println(this.listaFavoritos.getFavoritos());
     }
 
-    public void calificarContenido(String titulo, int calificacion) {
+    public void calificarContenido(int idContenido, int estrellas) {
+
     }
 }
