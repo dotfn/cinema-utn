@@ -1,8 +1,12 @@
 package com.grupo2.cinemautn.models.usuarios;
 
+import com.grupo2.cinemautn.models.contenido.Contenido;
+
+import java.util.HashSet;
+
 public class ListaFavoritos {
     //atributos
-    private HashSet <Contenido> favoritos;
+    private HashSet<Contenido> favoritos;
 
     //constructor
     public ListaFavoritos() {
