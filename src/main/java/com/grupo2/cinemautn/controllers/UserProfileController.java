@@ -1,5 +1,7 @@
 package com.grupo2.cinemautn.controllers;
 
+import com.grupo2.cinemautn.models.usuarios.Usuario;
+import com.grupo2.cinemautn.service.SesionActivaService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -33,12 +35,23 @@ public class UserProfileController {
     private String tempNombre;
     private String tempCorreo;
 
+    // Usuario actual en la sesión (puede venir de setUser o de SesionActivaService)
+    private Usuario usuarioActual;
+
 
     @FXML
     private void initialize() {
         System.out.println("[DEBUG] Inicializando controlador de perfil...");
         setEditable(false);
-        loadMockUserData();
+        // Intentar cargar usuario desde SesionActivaService
+        if (this.usuarioActual == null) {
+            this.usuarioActual = com.grupo2.cinemautn.service.SesionActivaService.getInstance().getUsuario();
+        }
+        if (this.usuarioActual != null) {
+            setUser(this.usuarioActual);
+        } else {
+            loadMockUserData();
+        }
         updateStatus("Perfil cargado correctamente.");
     }
 
@@ -61,6 +74,13 @@ public class UserProfileController {
     private void onGuardar() {
         nombre = txtNombre.getText();
         correo = txtCorreo.getText();
+
+        // Si hay un usuario en sesión, actualizarlo también
+        if (usuarioActual != null) {
+            usuarioActual.setNombre(nombre);
+            // no cambiamos email por ahora
+            SesionActivaService.getInstance().setUsuario(usuarioActual);
+        }
 
         System.out.println("[MOCK] Datos actualizados:");
         System.out.println("  - Nombre: " + nombre);
@@ -106,6 +126,18 @@ public class UserProfileController {
     private void updateStatus(String text) {
         if (statusLabel != null) {
             statusLabel.setText(text);
+        }
+    }
+
+    /**
+     * Permite que el controlador reciba el Usuario que está logueado.
+     * Debe llamarse justo después de `loader.load()` desde quien navega.
+     */
+    public void setUser(Usuario usuario) {
+        this.usuarioActual = usuario;
+        if (usuarioActual != null) {
+            txtNombre.setText(usuarioActual.getNombre() != null ? usuarioActual.getNombre() : "");
+            txtCorreo.setText(usuarioActual.getEmail() != null ? usuarioActual.getEmail() : "");
         }
     }
 }

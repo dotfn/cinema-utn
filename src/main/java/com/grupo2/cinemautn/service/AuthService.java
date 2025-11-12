@@ -27,6 +27,8 @@ public class AuthService {
             String uPass = u.getContrasena();
             boolean activo = u.isEstado();
             if (uEmail != null && uEmail.equalsIgnoreCase(email) && uPass != null && uPass.equals(contrasena) && activo) {
+                // Guardar en la sesión activa
+                SesionActivaService.getInstance().setUsuario(u);
                 return u;
             }
         }

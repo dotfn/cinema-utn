@@ -1,6 +1,8 @@
 package com.grupo2.cinemautn.controllers;
 
 import com.grupo2.cinemautn.models.contenido.Contenido;
+import com.grupo2.cinemautn.service.SesionActivaService;
+import com.grupo2.cinemautn.models.usuarios.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -68,7 +70,15 @@ public class DashboardController implements Initializable {
 
         // Navegar al userProfile
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/userProfile.fxml"));
-        Scene scene = new Scene(loader.load());
+        // Cargar fxml y obtener controller
+        javafx.scene.Parent root = loader.load();
+        Object ctrl = loader.getController();
+        Usuario logged = SesionActivaService.getInstance().getUsuario();
+        if (ctrl instanceof com.grupo2.cinemautn.controllers.UserProfileController) {
+            ((com.grupo2.cinemautn.controllers.UserProfileController) ctrl).setUser(logged);
+        }
+
+        Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Perfil de Usuario");
@@ -76,4 +86,3 @@ public class DashboardController implements Initializable {
 
     }
 }
-

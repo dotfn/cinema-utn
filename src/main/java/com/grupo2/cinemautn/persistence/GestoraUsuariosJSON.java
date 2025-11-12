@@ -10,9 +10,11 @@ import java.util.ArrayList;
 
 public class GestoraUsuariosJSON {
 
+    private static final String DEFAULT_FILE = "usuarios.json";
+
     //  SERIALIZAR
-    public void listaToArchivo(ArrayList<Usuario> lista, String nombreArchivo) {
-        OperacionesLectoEscritura.grabar (nombreArchivo, serializarLista(lista));
+    public void listaToArchivo(ArrayList<Usuario> lista) {
+        OperacionesLectoEscritura.grabar (DEFAULT_FILE, serializarLista(lista));
 
     }
 
@@ -48,8 +50,8 @@ public class GestoraUsuariosJSON {
 
     // DESERIALIZAR
 
-    public ArrayList<Usuario> archivoALista(String nombreArchivo) {
-        JSONTokener tokener = OperacionesLectoEscritura.leer(nombreArchivo);
+    public ArrayList<Usuario> archivoALista() {
+        JSONTokener tokener = OperacionesLectoEscritura.leer(DEFAULT_FILE);
         ArrayList<Usuario> lista = new ArrayList<>();
         try {
             if (tokener == null) return lista; // archivo no existe -> lista vacía
