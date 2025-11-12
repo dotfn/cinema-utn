@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class GestoraPeliculasJSON {
 
+
+
     //  SERIALIZAR
     public void listaToArchivo(ArrayList<Pelicula> lista, String nombreArchivo) {
         OperacionesLectoEscritura.grabar (nombreArchivo, serializarLista(lista));

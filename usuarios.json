@@ -1,0 +1,9 @@
+[{
+    "estado": true,
+    "correo": "admin@mail.com",
+    "contrasena": "admin",
+    "favoritos": [],
+    "id": 1,
+    "nombre": "admin",
+    "rol": "ADMINISTRADOR"
+}]
