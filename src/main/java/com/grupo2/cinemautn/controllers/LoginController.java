@@ -45,7 +45,6 @@ public class LoginController {
             statusLabel.setText("Credenciales inválidas.");
             return;
         }
-/*
         // Navegar al dashboard
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/dashboard.fxml"));
         Scene mainScene = new Scene(loader.load());
@@ -53,7 +52,7 @@ public class LoginController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(mainScene);
         stage.setTitle("Principal");
-        stage.show();*/
+        stage.show();
     }
 
     @FXML

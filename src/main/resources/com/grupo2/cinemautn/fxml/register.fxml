@@ -5,7 +5,7 @@
 <?import javafx.geometry.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.grupo2.cinemautn.controllers.DashboardController.RegisterController"
+            fx:controller="com.grupo2.cinemautn.controllers.RegisterController"
             prefWidth="600" prefHeight="520">
 
     <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0"
