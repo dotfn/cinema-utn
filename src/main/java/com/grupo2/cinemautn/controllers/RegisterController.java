@@ -32,7 +32,6 @@ public class RegisterController {
 
     private UsuarioService usuarioService = new UsuarioService();
     private final GestoraUsuariosJSON gestoraUsuarios = new GestoraUsuariosJSON();
-    private final String ARCHIVO_USUARIOS = "usuarios.json";
 
     @FXML
     public void onCrearUsuario(javafx.event.ActionEvent event) throws IOException {
@@ -58,7 +57,7 @@ public class RegisterController {
         }
 
         // Cargar usuarios existentes desde JSON
-        ArrayList<com.grupo2.cinemautn.models.usuarios.Usuario> usuarios = gestoraUsuarios.archivoALista(ARCHIVO_USUARIOS);
+        ArrayList<com.grupo2.cinemautn.models.usuarios.Usuario> usuarios = gestoraUsuarios.archivoALista();
 
         // Verificar si el correo ya existe en el archivo
         for (com.grupo2.cinemautn.models.usuarios.Usuario u : usuarios) {
@@ -72,7 +71,7 @@ public class RegisterController {
         com.grupo2.cinemautn.models.usuarios.Usuario nuevo = new com.grupo2.cinemautn.models.usuarios.Usuario(nombre, correo, pass, Rol.BASE);
         usuarios.add(nuevo);
         // Persistir
-        gestoraUsuarios.listaToArchivo(usuarios, ARCHIVO_USUARIOS);
+        gestoraUsuarios.listaToArchivo(usuarios);
 
         statusLabel.setStyle("-fx-text-fill: #080;");
         statusLabel.setText("Usuario creado correctamente. Redirigiendo...");

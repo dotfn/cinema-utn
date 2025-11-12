@@ -1,11 +1,16 @@
 package com.grupo2.cinemautn.models.usuarios;
 import com.grupo2.cinemautn.models.contenido.Contenido;
 import com.grupo2.cinemautn.models.contenido.Genero;
+import com.grupo2.cinemautn.models.contenido.Pelicula;
+import com.grupo2.cinemautn.models.contenido.Serie;
 import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.UsuarioService;
 
 
 public class Administrador extends Usuario{
+    UsuarioService usuarioService = new UsuarioService();
+    ContenidoService contenidoService = new ContenidoService();
+
     //constructor
     public Administrador(String nombre, String email, String contrasena) {
         super(nombre, email, contrasena, Rol.ADMINISTRADOR);
@@ -16,55 +21,60 @@ public class Administrador extends Usuario{
     }
 
     //metodos
+
     //gestion de contenido
-    public void crearContenido(ContenidoService contenidoService, Contenido contenido) {
-        contenidoService.crear(contenido);
+    public void crearContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios) {
+        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios);
+        contenidoService.alta(contenido);
     }
 
-    public void leerContenido(ContenidoService contenidoService, int id) {
-            Contenido c = contenidoService.leer(id);
+    public void crearContenido(String titulo, Genero genero, int anio, String director, double duracion) {
+        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion);
+        contenidoService.alta(contenido);
     }
 
-    public void actualizarContenido(ContenidoService contenidoService, Contenido contenidoActualizado) {
-        contenidoService.actualizar(contenidoActualizado);
+    public void eliminarContenido(Contenido contenido) {
+        contenidoService.baja(contenido.getId());
     }
 
-    public void eliminarContenido(ContenidoService contenidoService, int id) {
-        contenidoService.eliminar(id);
+    public void modificarContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios) {
+        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios);
+        contenidoService.modificacion(contenido);
     }
 
-    public void listarContenidos(ContenidoService contenidoService) {
-        System.out.println("Lista de contenidos:");
-        for (Contenido c : contenidoService.listar()) {
-            System.out.println(c.toString());
-        }
+    public void modificarContenido(String titulo, Genero genero, int anio, String director, double duracion) {
+        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion);
+        contenidoService.modificacion(contenido);
     }
 
-    public void buscarContenidoPorGenero(ContenidoService contenidoService, Genero genero) {
-        System.out.println("Contenidos del género " + genero + ":");
-        for (Contenido c : contenidoService.buscarPorGenero(genero)) {
-            System.out.println(c);
-        }
+    public Contenido consultarContenido(Contenido contenido) {
+        return contenidoService.consulta(contenido.getId());
+    }
+
+    public void listarContenidos() {
+        contenidoService.listar();
     }
 
     //gestion de usuarios
-    public void crearUsuario(UsuarioService usuarioService, String nombre, String email, String contrasena, Rol rol) {
-        usuarioService.crear(nombre, email, contrasena, rol);
+    public void crearUsuario(String nombre, String email, String contrasena, Rol rol) {
+        Usuario u = new Usuario(nombre, email, contrasena, rol);
+        usuarioService.alta(u);
     }
 
-    public void eliminarUsuario(UsuarioService usuarioService, String email) {
-        usuarioService.eliminar(email);
+    public void eliminarUsuario(Usuario usuario) {
+        usuarioService.baja(usuario.getIdUsuario());
     }
 
-    public void modificarUsuario(UsuarioService usuarioService, String email, String nuevoNombre, String nuevaContrasena) {
-        usuarioService.modificar(email, nuevoNombre, nuevaContrasena);
+    public void modificarUsuario(String nuevoEmail, String nuevoNombre, String nuevaContrasena) {
+        Usuario u = new Usuario(nuevoEmail, nuevoNombre, nuevaContrasena, Rol.PREMIUM);
+        usuarioService.modificacion(u);
     }
 
-    public void listarUsuarios(UsuarioService usuarioService) {
+    public Usuario consultarUsuario(Usuario usuario) {
+        return usuarioService.consulta(usuario.getIdUsuario());
+    }
+
+    public void listarUsuarios() {
         usuarioService.listar();
-    }
-
-    public void buscarUsuario(UsuarioService usuarioService, String email) {
-        System.out.println(usuarioService.buscarPorCorreo(email));
     }
 }

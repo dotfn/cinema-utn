@@ -12,5 +12,12 @@
         "nombre": "nico",
         "email": "nicomail",
         "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "nombre": "mateo m",
+        "email": "mateom@gmail.com",
+        "rol": "BASE"
     }
 ]

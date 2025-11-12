@@ -36,6 +36,8 @@ public class Usuario {
 
     //getters y settersp
 
+    public int getIdUsuario() {return idUsuario;};
+
     public String getNombre() {
         return nombre;
     }

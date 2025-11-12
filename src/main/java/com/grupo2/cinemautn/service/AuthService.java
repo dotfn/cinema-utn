@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class AuthService {
 
     private final GestoraUsuariosJSON gestoraUsuarios = new GestoraUsuariosJSON();
-    private final String ARCHIVO_USUARIOS = "usuarios.json";
 
     /**
      * Intenta autenticar un usuario por email y contraseña.
@@ -18,7 +17,7 @@ public class AuthService {
      */
     public Usuario authenticate(String email, String contrasena) {
         if (email == null || contrasena == null) return null;
-        ArrayList<Usuario> usuarios = gestoraUsuarios.archivoALista(ARCHIVO_USUARIOS);
+        ArrayList<Usuario> usuarios = gestoraUsuarios.archivoALista();
         if (usuarios == null) return null;
 
         for (Usuario u : usuarios) {

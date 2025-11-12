@@ -5,8 +5,8 @@ public class Pelicula extends Contenido {
     private double duracion; // en horas
 
     //Construtor
-    public Pelicula(int id, String titulo, Genero genero, int anio, String director, double duracion) {
-        super(id, titulo, genero, anio, director);
+    public Pelicula(String titulo, Genero genero, int anio, String director, double duracion) {
+        super(titulo, genero, anio, director);
         this.duracion = duracion;
     }
     public Pelicula(){

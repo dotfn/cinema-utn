@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 public class GestoraPeliculasJSON {
 
+    private static final String DEFAULT_FILE = "peliculas.json";
+
     //  SERIALIZAR
-    public void listaToArchivo(ArrayList<Pelicula> lista, String nombreArchivo) {
-        OperacionesLectoEscritura.grabar (nombreArchivo, serializarLista(lista));
+    public void listaToArchivo(ArrayList<Pelicula> lista) {
+        OperacionesLectoEscritura.grabar (DEFAULT_FILE, serializarLista(lista));
 
     }
 
@@ -44,8 +46,8 @@ public class GestoraPeliculasJSON {
 
     // DESERIALIZAR
 
-    public ArrayList<Pelicula> archivoALista(String nombreArchivo) {
-        JSONTokener tokener = OperacionesLectoEscritura.leer(nombreArchivo);
+    public ArrayList<Pelicula> archivoALista() {
+        JSONTokener tokener = OperacionesLectoEscritura.leer(DEFAULT_FILE);
         ArrayList<Pelicula> lista = null;
         try {
             lista = deserializarLista(new JSONArray(tokener));

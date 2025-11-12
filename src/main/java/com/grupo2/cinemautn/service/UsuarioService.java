@@ -1,48 +1,53 @@
 package com.grupo2.cinemautn.service;
 
+import com.grupo2.cinemautn.interfaces.ABMCL;
 import com.grupo2.cinemautn.models.usuarios.Rol;
 import com.grupo2.cinemautn.models.usuarios.Usuario;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
-public class UsuarioService {
+public class UsuarioService implements ABMCL<Usuario> {
     //atributos
-    private HashSet<Usuario> usuarios;
+    private final HashSet<Usuario> usuarios;
 
     //constructor
     public UsuarioService() {
         this.usuarios = new HashSet<>();
     }
 
-    //metodos
-    public boolean verificarEmail(String email){
-        for (Usuario usuario : usuarios){
-            if (usuario.getEmail().equalsIgnoreCase(email)){
+    // métodos auxiliares
+    public boolean verificarEmail(String email) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail() != null && usuario.getEmail().equalsIgnoreCase(email)) {
                 return false; //el email ya existe
             }
         }
         return true; //el email no existe
     }
 
-    public void crear(String nombre, String email, String contrasena, Rol rol){
-        if (verificarEmail(email)){
+    /*
+    // versiones de conveniencia (mantener compatibilidad con llamadas existentes)
+    public void alta(String nombre, String email, String contrasena, Rol rol) {
+        if (verificarEmail(email)) {
             Usuario nuevoUsuario = new Usuario(nombre, email, contrasena, rol);
             usuarios.add(nuevoUsuario);
         }
     }
 
-    public void eliminar(String email){
+    public void baja(String email) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equalsIgnoreCase(email)) {
+            if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(email)) {
                 u.setEstado(false);
                 return;
             }
         }
     }
 
-    public void modificar(String email, String nuevoNombre, String nuevaContrasena) {
+    public void modificacion(String email, String nuevoNombre, String nuevaContrasena) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equalsIgnoreCase(email)) {
+            if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(email)) {
                 u.setNombre(nuevoNombre);
                 u.setContrasena(nuevaContrasena);
                 return;
@@ -50,19 +55,62 @@ public class UsuarioService {
         }
     }
 
-    public String buscarPorCorreo(String email) {
+    public Usuario consulta(String email) {
         for (Usuario u : usuarios) {
-            if (u.getEmail().equalsIgnoreCase(email)) {
-                return u.toString();
+            if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(email)) {
+                return u;
             }
         }
-        return "No encontrado";
+        return null;
+    }
+    */
+
+    // Implementación de la interfaz ABMCL
+    @Override
+    public void alta(Usuario c) {
+        if (c == null) return;
+        if (verificarEmail(c.getEmail())) {
+            usuarios.add(c);
+        }
     }
 
-    public void listar(){
-        System.out.println("Lista de usuarios: ");
+    @Override
+    public void baja(int id) {
         for (Usuario u : usuarios) {
-            System.out.println(u.toString());
+            if (u != null && u.getIdUsuario() == id) {
+                u.setEstado(false);
+                return;
+            }
         }
+    }
+
+    @Override
+    public Usuario consulta(int id) {
+        for (Usuario u : usuarios) {
+            if (u.getIdUsuario() == id) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void modificacion(Usuario c) {
+        if (c == null) return;
+        int id = c.getIdUsuario();
+        for (Usuario usuarioExistente : usuarios) {
+            if (usuarioExistente.getIdUsuario() == id) {
+                // actualizar campos relevantes
+                if (c.getNombre() != null) usuarioExistente.setNombre(c.getNombre());
+                if (c.getContrasena() != null) usuarioExistente.setContrasena(c.getContrasena());
+                if (c.getRol() != null) usuarioExistente.setRol(c.getRol());
+                return;
+            }
+        }
+    }
+
+    @Override
+    public List<Usuario> listar() {
+        return new ArrayList<>(usuarios);
     }
 }

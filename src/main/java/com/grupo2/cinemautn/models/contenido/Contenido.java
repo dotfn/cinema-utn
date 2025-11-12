@@ -4,33 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Contenido {
-    protected int id;
+    private static int contador = 0;
+    private int id;
     protected String titulo;
     protected Genero genero;
     protected int anio;
     protected String director;
+    protected boolean estado;
     protected List<Calificacion> calificaciones = new ArrayList<>();
 
-    public Contenido(int id, String titulo, Genero genero, int anio, String director) {
-        this.id = id;
+    public Contenido() {
+        contador ++;
+        this.id = contador;
+        this.estado = true;
+    }
+
+    public Contenido(String titulo, Genero genero, int anio, String director) {
+        contador ++;
+        this.id = contador;
         this.titulo = titulo;
         this.genero = genero;
         this.anio = anio;
+        this.estado = true;
         this.director = director;
     }
-    public Contenido(){
-        super();
-    }
 
+
+    // setters y getters
     public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
+
     public String getTitulo() { return titulo; }
+
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
     public Genero getGenero() { return genero; }
+
+    public void setGenero(Genero genero) { this.genero = genero; }
+
     public int getAnio() { return anio; }
+
+    public void setAnio(int anio) { this.anio = anio; }
+
     public String getDirector() { return director; }
 
-    public void agregarCalificacion(Calificacion calificacion) {
-        calificaciones.add(calificacion);
-    }
+    public void setDirector(String director) { this.director = director; }
+
+    public boolean isEstado() { return estado; }
+
+    public void setEstado(boolean estado) { this.estado = estado; }
+
+    public List<Calificacion> getCalificaciones() { return calificaciones; }
+
+    public void setCalificaciones(List<Calificacion> calificaciones) { this.calificaciones = calificaciones; }
+
+    public void agregarCalificacion(Calificacion calificacion) { calificaciones.add(calificacion); }
+
+    // metodos
 
     public double promedioCalificaciones() {
         if (calificaciones.isEmpty()) return 0;

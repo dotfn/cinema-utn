@@ -1,25 +1,41 @@
 package com.grupo2.cinemautn.service;
 
 import com.grupo2.cinemautn.exceptions.ContenidoNoEncontradoException;
-import com.grupo2.cinemautn.interfaces.IGestionable;
+import com.grupo2.cinemautn.interfaces.ABMCL;
 import com.grupo2.cinemautn.models.contenido.Contenido;
-import com.grupo2.cinemautn.models.contenido.Genero;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ContenidoService implements IGestionable<Contenido> {
+public class ContenidoService implements ABMCL<Contenido> {
     private Map<Integer, Contenido> contenidos = new HashMap<>();
 
+
+    // interfaz ABMCL
     @Override
-    public void crear(Contenido c) {
-        contenidos.put(c.getId(), c);
+    public void alta(Contenido c) {
+        if (c == null) return;
+        if (!contenidos.containsKey(c.getId())) {
+            contenidos.put(c.getId(), c);
+        } else {
+            throw new IllegalArgumentException("El contenido con ID " + c.getId() + " ya existe.");
+        }
     }
 
     @Override
-    public Contenido leer(int id) {
+    public void baja(int id) {
+        if (!contenidos.containsKey(id)) {
+            throw new ContenidoNoEncontradoException("No se puede eliminar, contenido no encontrado.");
+        }
+
+        // implementación de baja lógica
+        contenidos.get(id).setEstado(false);
+    }
+
+    @Override
+    public Contenido consulta(int id) {
         Contenido contenido = contenidos.get(id);
         if (contenido == null) {
             throw new ContenidoNoEncontradoException("Contenido con ID " + id + " no encontrado.");
@@ -28,7 +44,7 @@ public class ContenidoService implements IGestionable<Contenido> {
     }
 
     @Override
-    public void actualizar(Contenido c) {
+    public void modificacion(Contenido c) {
         if (!contenidos.containsKey(c.getId())) {
             throw new ContenidoNoEncontradoException("No se puede actualizar, contenido no encontrado.");
         }
@@ -36,25 +52,7 @@ public class ContenidoService implements IGestionable<Contenido> {
     }
 
     @Override
-    public void eliminar(int id) {
-        if (!contenidos.containsKey(id)) {
-            throw new ContenidoNoEncontradoException("No se puede eliminar, contenido no encontrado.");
-        }
-        contenidos.remove(id);
-    }
-
-    @Override
     public List<Contenido> listar() {
         return new ArrayList<>(contenidos.values());
-    }
-
-    public List<Contenido> buscarPorGenero(Genero genero) {
-        List<Contenido> resultado = new ArrayList<>();
-        for (Contenido c : contenidos.values()) {
-            if (c.getGenero() == genero) {
-                resultado.add(c);
-            }
-        }
-        return resultado;
     }
 }
