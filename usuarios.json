@@ -19,5 +19,26 @@
         "nombre": "mateo m",
         "email": "mateom@gmail.com",
         "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "nombre": "mateo m",
+        "email": "mateo.mail",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "nombre": "mati cabj",
+        "email": "mateom@gmail.com",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "nombre": "mateo 2",
+        "email": "mateom@gmail.com",
+        "rol": "BASE"
     }
 ]

@@ -1,5 +1,6 @@
 package com.grupo2.cinemautn.controllers;
 
+import com.grupo2.cinemautn.models.usuarios.Usuario;
 import com.grupo2.cinemautn.models.usuarios.Rol;
 import com.grupo2.cinemautn.service.UsuarioService;
 import com.grupo2.cinemautn.persistence.GestoraUsuariosJSON;
@@ -36,12 +37,12 @@ public class RegisterController {
     @FXML
     public void onCrearUsuario(javafx.event.ActionEvent event) throws IOException {
         String nombre = txtNombre.getText().trim();
-        String correo = txtCorreo.getText().trim();
+        String email = txtCorreo.getText().trim();
         String pass = passwordField.getText();
         String confirm = confirmPasswordField.getText();
 
         // Validaciones básicas
-        if (nombre.isEmpty() || correo.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
+        if (nombre.isEmpty() || email.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
             statusLabel.setText("Por favor complete todos los campos obligatorios.");
             return;
         }
@@ -57,18 +58,16 @@ public class RegisterController {
         }
 
         // Cargar usuarios existentes desde JSON
-        ArrayList<com.grupo2.cinemautn.models.usuarios.Usuario> usuarios = gestoraUsuarios.archivoALista();
+        ArrayList<Usuario> usuarios = gestoraUsuarios.archivoALista();
 
-        // Verificar si el correo ya existe en el archivo
-        for (com.grupo2.cinemautn.models.usuarios.Usuario u : usuarios) {
-            if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(correo)) {
-                statusLabel.setText("El correo ya está registrado.");
-                return;
-            }
+        // Verificar si el correo es apto
+        if (!usuarioService.verificarEmail(email)) {
+            statusLabel.setText("El email no es apto.");
+            return;
         }
 
         // Crear usuario con rol BASE por defecto y añadir a la lista
-        com.grupo2.cinemautn.models.usuarios.Usuario nuevo = new com.grupo2.cinemautn.models.usuarios.Usuario(nombre, correo, pass, Rol.BASE);
+        Usuario nuevo = new Usuario(nombre, email, pass, Rol.BASE);
         usuarios.add(nuevo);
         // Persistir
         gestoraUsuarios.listaToArchivo(usuarios);
