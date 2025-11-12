@@ -1,19 +1,16 @@
 package com.grupo2.cinemautn.models.usuarios;
 
-import com.grupo2.cinemautn.models.contenido.Contenido;
-
 import java.util.Objects;
 
 public class Usuario {
     //atributos
-    private static int contador = 0;
+    private static int contador = 0; //TODO: revisar inicialización desde JSON
     private int idUsuario;
     private String nombre;
     private String email;
     private String contrasena;
     private boolean estado;
     private Rol rol;
-    private ListaFavoritos listaFavoritos;
 
     //constructor
     public Usuario(String nombre, String email, String contrasena, Rol rol) {
@@ -24,19 +21,18 @@ public class Usuario {
         this.contrasena = contrasena;
         this.estado = true; //activo por defecto
         this.rol = rol;
-        this.listaFavoritos = new ListaFavoritos();
     }
 
     public Usuario() {
         contador ++;
         this.idUsuario = contador;
         this.estado = true; //activo por defecto
-        listaFavoritos = new ListaFavoritos();
     }
 
     //getters y settersp
+    public int getIdUsuario() {return idUsuario;}
 
-    public int getIdUsuario() {return idUsuario;};
+    public void setIdUsuario(int idUsuario) {this.idUsuario = idUsuario;}
 
     public String getNombre() {
         return nombre;
@@ -89,7 +85,6 @@ public class Usuario {
                 ", contrasena='" + contrasena + '\'' +
                 ", estado=" + estado +
                 ", rol=" + rol +
-                ", listaFavoritos=" + listaFavoritos +
                 '}';
     }
 
@@ -99,25 +94,34 @@ public class Usuario {
         Usuario usuario = (Usuario) o;
         return Objects.equals(email, usuario.email);
     }
+}
 
+/*
     @Override
     public int hashCode() {
         return Objects.hashCode(email);
     }
 
-    public void agregarAFavoritos(Contenido contenido) {
-        this.listaFavoritos.agregarFavorito(contenido);
+    public static void actualizarContadorDesdeJSON(String rutaArchivo) {
+        try {
+            String contenido = new String(Files.readAllBytes(Paths.get(rutaArchivo)));
+            JSONArray array = new JSONArray(contenido);
+
+            int maxId = 0;
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject obj = array.getJSONObject(i);
+                int id = obj.getInt("id");
+                if (id > maxId) maxId = id;
+            }
+
+            contadorId = maxId; // 👈 actualizamos el contador con el último id usado
+            System.out.println("Contador de ID actualizado: " + contadorId);
+        } catch (Exception e) {
+            System.out.println("No se pudo leer el archivo JSON. Se iniciará desde 0.");
+        }
     }
 
-    public void eliminarDeFavoritos(Contenido contenido) {
-        this.listaFavoritos.eliminarFavorito(contenido);
-    }
-
-    public void verFavoritos() {
-        System.out.println(this.listaFavoritos.getFavoritos());
-    }
 
     public void calificarContenido(int idContenido, int estrellas) {
-
     }
-}
+ */

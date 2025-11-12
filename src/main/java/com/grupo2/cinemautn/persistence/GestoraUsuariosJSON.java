@@ -23,6 +23,7 @@ public class GestoraUsuariosJSON {
         try {
             jsonObject = new JSONObject();
             // Guardar atributos esenciales
+            jsonObject.put("id", u.getIdUsuario());
             jsonObject.put("nombre", u.getNombre());
             jsonObject.put("email", u.getEmail());
             jsonObject.put("contrasena", u.getContrasena());
@@ -66,6 +67,7 @@ public class GestoraUsuariosJSON {
     public Usuario deserializar (JSONObject jsonObject) {
         Usuario u = new Usuario();
         try {
+            if (jsonObject.has("id") && !jsonObject.isNull("id")) u.setIdUsuario(jsonObject.getInt("id"));
             if (jsonObject.has("nombre") && !jsonObject.isNull("nombre")) u.setNombre(jsonObject.getString("nombre"));
             if (jsonObject.has("email") && !jsonObject.isNull("email")) u.setEmail(jsonObject.getString("email"));
             if (jsonObject.has("contrasena") && !jsonObject.isNull("contrasena")) u.setContrasena(jsonObject.getString("contrasena"));
