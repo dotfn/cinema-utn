@@ -27,14 +27,12 @@ public class UserProfileController {
     // Datos simulados (mock)
     private String nombre = "Juan Pérez";
     private String correo = "juan.perez@correo.com";
-    private String telefono = "123456789";
-    private String direccion = "Calle Falsa 123, Buenos Aires";
+
 
     // Copias temporales para revertir
     private String tempNombre;
     private String tempCorreo;
-    private String tempTelefono;
-    private String tempDireccion;
+
 
     @FXML
     private void initialize() {
@@ -47,16 +45,13 @@ public class UserProfileController {
     private void loadMockUserData() {
         txtNombre.setText(nombre);
         txtCorreo.setText(correo);
-        txtTelefono.setText(telefono);
-        txtDireccion.setText(direccion);
+
     }
 
     @FXML
     private void onEditar() {
         tempNombre = txtNombre.getText();
         tempCorreo = txtCorreo.getText();
-        tempTelefono = txtTelefono.getText();
-        tempDireccion = txtDireccion.getText();
 
         setEditable(true);
         updateStatus("Modo edición activado.");
@@ -66,14 +61,10 @@ public class UserProfileController {
     private void onGuardar() {
         nombre = txtNombre.getText();
         correo = txtCorreo.getText();
-        telefono = txtTelefono.getText();
-        direccion = txtDireccion.getText();
 
         System.out.println("[MOCK] Datos actualizados:");
         System.out.println("  - Nombre: " + nombre);
         System.out.println("  - Correo: " + correo);
-        System.out.println("  - Teléfono: " + telefono);
-        System.out.println("  - Dirección: " + direccion);
 
         setEditable(false);
         updateStatus("Cambios guardados correctamente.");
@@ -83,8 +74,6 @@ public class UserProfileController {
     private void onCancelar() {
         txtNombre.setText(tempNombre);
         txtCorreo.setText(tempCorreo);
-        txtTelefono.setText(tempTelefono);
-        txtDireccion.setText(tempDireccion);
 
         setEditable(false);
         updateStatus("Cambios cancelados.");

@@ -36,4 +36,14 @@ public class LoginController {
         stage.show();
     }
 
+    @FXML
+    public void onRegister(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/register.fxml"));
+        Scene registerScene = new Scene(loader.load());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(registerScene);
+        stage.setTitle("Registro");
+        stage.show();
+    }
+
 }

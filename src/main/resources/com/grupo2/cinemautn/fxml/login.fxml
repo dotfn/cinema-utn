@@ -27,7 +27,7 @@
                 <Button fx:id="loginButton" text="Iniciar Sesión" onAction="#onLogin" />
                 <VBox spacing="5" alignment="CENTER">
                     <Label text="¿No tienes una cuenta?" />
-                    <Hyperlink fx:id="registerLink" text="Regístrate aquí" />
+                    <Hyperlink fx:id="registerLink" text="Regístrate aquí" onAction="#onRegister" />
                 </VBox>
             </VBox>
         </center>
