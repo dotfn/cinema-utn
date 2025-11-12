@@ -44,11 +44,6 @@
                     <Label text="Repetir contraseña:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
                     <PasswordField fx:id="confirmPasswordField" promptText="********" GridPane.rowIndex="3" GridPane.columnIndex="1" />
 
-                    <Label text="Teléfono:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-                    <TextField fx:id="txtTelefono" promptText="(011) 15-1234-5678" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-
-                    <Label text="Dirección:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-                    <TextField fx:id="txtDireccion" promptText="Calle, número, ciudad" GridPane.rowIndex="5" GridPane.columnIndex="1" />
                 </GridPane>
 
                 <HBox alignment="CENTER_LEFT" spacing="8">

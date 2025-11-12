@@ -48,12 +48,6 @@
 
                     <Label text="Correo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                     <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                    <Label text="Teléfono:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                    <TextField fx:id="txtTelefono" promptText="Número de contacto" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                    <Label text="Dirección:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                    <TextField fx:id="txtDireccion" promptText="Dirección del usuario" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
                 </GridPane>
 
                 <!-- Botones -->

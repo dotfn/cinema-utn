@@ -43,6 +43,8 @@ public class UsuarioService implements IGestionable<Usuario> {
         if (u == null) return;
         Usuario existente = leer(u.getIdUsuario());
         if (existente != null) {
+            System.out.println("Cambiando usuario: " + existente + " por " + u);
+
             usuarios.remove(existente);
             usuarios.add(u);
             guardarUsuario();

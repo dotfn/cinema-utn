@@ -54,8 +54,6 @@ public class RegisterController {
         txtCorreo.clear();
         passwordField.clear();
         confirmPasswordField.clear();
-        txtTelefono.clear();
-        txtDireccion.clear();
         chkTerms.setSelected(false);
         statusLabel.setText("");
     }

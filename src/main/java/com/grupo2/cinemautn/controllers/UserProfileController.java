@@ -19,8 +19,6 @@ public class UserProfileController {
     @FXML private ImageView profileImage;
     @FXML private TextField txtNombre;
     @FXML private TextField txtCorreo;
-    @FXML private TextField txtTelefono;
-    @FXML private TextField txtDireccion;
     @FXML private Button btnEditar;
     @FXML private Button btnGuardar;
     @FXML private Button btnCancelar;
@@ -33,8 +31,6 @@ public class UserProfileController {
     // Copias temporales para revertir
     private String tempNombre;
     private String tempCorreo;
-    private String tempTelefono;
-    private String tempDireccion;
 
     @FXML
     private void initialize() {
@@ -66,17 +62,12 @@ public class UserProfileController {
         if (usuarioActual == null) return;
         txtNombre.setText(usuarioActual.getNombre());
         txtCorreo.setText(usuarioActual.getEmail());
-        // telefono y direccion no forman parte actualmente de Usuario; si los agregas, mapearlos aquí
-        txtTelefono.setText("");
-        txtDireccion.setText("");
     }
 
     @FXML
     private void onEditar() {
         tempNombre = txtNombre.getText();
         tempCorreo = txtCorreo.getText();
-        tempTelefono = txtTelefono.getText();
-        tempDireccion = txtDireccion.getText();
 
         setEditable(true);
         updateStatus("Modo edición activado.");
@@ -88,7 +79,6 @@ public class UserProfileController {
 
         usuarioActual.setNombre(txtNombre.getText());
         usuarioActual.setEmail(txtCorreo.getText());
-        // telefono/direccion: no persistidos aquí salvo que extiendas Usuario
 
         // persistir cambios
         usuarioService.actualizar(usuarioActual);
@@ -101,9 +91,6 @@ public class UserProfileController {
     private void onCancelar() {
         txtNombre.setText(tempNombre);
         txtCorreo.setText(tempCorreo);
-        txtTelefono.setText(tempTelefono);
-        txtDireccion.setText(tempDireccion);
-
         setEditable(false);
         updateStatus("Cambios cancelados.");
     }
@@ -126,8 +113,6 @@ public class UserProfileController {
     private void setEditable(boolean editable) {
         txtNombre.setEditable(editable);
         txtCorreo.setEditable(editable);
-        txtTelefono.setEditable(editable);
-        txtDireccion.setEditable(editable);
 
         btnEditar.setDisable(editable);
         btnGuardar.setDisable(!editable);
