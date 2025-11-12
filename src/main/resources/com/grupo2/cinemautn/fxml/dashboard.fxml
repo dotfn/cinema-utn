@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.grupo2.cinemautn.controllers.DashboardController"
+            fx:controller="com.grupo2.cinemautn.controllers.DashboardController.DashboardController"
             prefWidth="900" prefHeight="650">
 
     <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0"

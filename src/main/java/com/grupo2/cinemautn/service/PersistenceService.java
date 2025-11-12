@@ -24,14 +24,14 @@ public class PersistenceService {
     }
 
     public void guardarDatosJSON() {
-        gestoraUsuarios.listaToArchivo(usuarios, "usuarios.json");
+        gestoraUsuarios.listaToArchivo(usuarios);
         gestoraPeliculas.listaToArchivo(peliculas, "peliculas.json");
         gestoraSeries.listaToArchivo(series, "series.json");
     }
 
     public void cargarDatosJSON() {
         // Obtener primero las listas desde los archivos
-        List<Usuario> usuariosFromFile = gestoraUsuarios.archivoALista("usuarios.json");
+        List<Usuario> usuariosFromFile = gestoraUsuarios.archivoALista();
         List<Pelicula> peliculasFromFile = gestoraPeliculas.archivoALista("peliculas.json");
         List<Serie> seriesFromFile = gestoraSeries.archivoALista("series.json");
 

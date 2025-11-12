@@ -35,6 +35,9 @@ public class Usuario {
     }
 
     //getters y settersp
+    public int getIdUsuario() { return idUsuario; }
+
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; } // es unicamente para la deserializacion
 
     public String getNombre() {
         return nombre;
@@ -75,6 +78,10 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public ListaFavoritos getListaFavoritos() { return listaFavoritos; }
+
+    public void setListaFavoritos(ListaFavoritos listaFavoritos) { this.listaFavoritos = listaFavoritos;}
 
     //otros métodos
 

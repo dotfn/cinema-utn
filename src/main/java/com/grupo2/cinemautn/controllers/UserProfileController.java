@@ -1,5 +1,8 @@
 package com.grupo2.cinemautn.controllers;
 
+import com.grupo2.cinemautn.models.usuarios.Usuario;
+import com.grupo2.cinemautn.service.UsuarioActivoService;
+import com.grupo2.cinemautn.service.UsuarioService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,11 +27,8 @@ public class UserProfileController {
     @FXML private Button btnBack;
     @FXML private Label statusLabel;
 
-    // Datos simulados (mock)
-    private String nombre = "Juan Pérez";
-    private String correo = "juan.perez@correo.com";
-    private String telefono = "123456789";
-    private String direccion = "Calle Falsa 123, Buenos Aires";
+    private UsuarioService usuarioService = UsuarioActivoService.usuarioService;
+    private Usuario usuarioActual;
 
     // Copias temporales para revertir
     private String tempNombre;
@@ -39,16 +39,36 @@ public class UserProfileController {
     @FXML
     private void initialize() {
         System.out.println("[DEBUG] Inicializando controlador de perfil...");
+
+        // Obtener usuario logueado
+        usuarioActual = UsuarioActivoService.authService.getUsuarioActual();
+        if (usuarioActual == null) {
+            // No hay usuario logueado: volver a login
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/login.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage = (Stage) txtNombre.getScene().getWindow();
+                stage.setScene(scene);
+                stage.setTitle("Login - Cinema UTN");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
         setEditable(false);
-        loadMockUserData();
+        loadUserData();
         updateStatus("Perfil cargado correctamente.");
     }
 
-    private void loadMockUserData() {
-        txtNombre.setText(nombre);
-        txtCorreo.setText(correo);
-        txtTelefono.setText(telefono);
-        txtDireccion.setText(direccion);
+    private void loadUserData() {
+        if (usuarioActual == null) return;
+        txtNombre.setText(usuarioActual.getNombre());
+        txtCorreo.setText(usuarioActual.getEmail());
+        // telefono y direccion no forman parte actualmente de Usuario; si los agregas, mapearlos aquí
+        txtTelefono.setText("");
+        txtDireccion.setText("");
     }
 
     @FXML
@@ -64,16 +84,14 @@ public class UserProfileController {
 
     @FXML
     private void onGuardar() {
-        nombre = txtNombre.getText();
-        correo = txtCorreo.getText();
-        telefono = txtTelefono.getText();
-        direccion = txtDireccion.getText();
+        if (usuarioActual == null) return;
 
-        System.out.println("[MOCK] Datos actualizados:");
-        System.out.println("  - Nombre: " + nombre);
-        System.out.println("  - Correo: " + correo);
-        System.out.println("  - Teléfono: " + telefono);
-        System.out.println("  - Dirección: " + direccion);
+        usuarioActual.setNombre(txtNombre.getText());
+        usuarioActual.setEmail(txtCorreo.getText());
+        // telefono/direccion: no persistidos aquí salvo que extiendas Usuario
+
+        // persistir cambios
+        usuarioService.actualizar(usuarioActual);
 
         setEditable(false);
         updateStatus("Cambios guardados correctamente.");

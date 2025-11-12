@@ -1,12 +1,11 @@
+// java
 package com.grupo2.cinemautn.models.usuarios;
 import com.grupo2.cinemautn.models.contenido.Contenido;
 import com.grupo2.cinemautn.models.contenido.Genero;
 import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.UsuarioService;
 
-
 public class Administrador extends Usuario{
-    //constructor
     public Administrador(String nombre, String email, String contrasena) {
         super(nombre, email, contrasena, Rol.ADMINISTRADOR);
     }
@@ -15,14 +14,13 @@ public class Administrador extends Usuario{
         setRol(Rol.ADMINISTRADOR);
     }
 
-    //metodos
-    //gestion de contenido
+    // gestión de contenido
     public void crearContenido(ContenidoService contenidoService, Contenido contenido) {
         contenidoService.crear(contenido);
     }
 
     public void leerContenido(ContenidoService contenidoService, int id) {
-            Contenido c = contenidoService.leer(id);
+        Contenido c = contenidoService.leer(id);
     }
 
     public void actualizarContenido(ContenidoService contenidoService, Contenido contenidoActualizado) {
@@ -47,21 +45,37 @@ public class Administrador extends Usuario{
         }
     }
 
-    //gestion de usuarios
+    // gestión de usuarios
     public void crearUsuario(UsuarioService usuarioService, String nombre, String email, String contrasena, Rol rol) {
-        usuarioService.crear(nombre, email, contrasena, rol);
+        Usuario nuevo = new Usuario(nombre, email, contrasena, rol);
+        usuarioService.crear(nuevo);
     }
 
     public void eliminarUsuario(UsuarioService usuarioService, String email) {
-        usuarioService.eliminar(email);
+        Usuario u = usuarioService.buscarPorCorreo(email);
+        if (u != null) {
+            usuarioService.eliminar(u.getIdUsuario());
+        }
     }
 
-    public void modificarUsuario(UsuarioService usuarioService, String email, String nuevoNombre, String nuevaContrasena) {
-        usuarioService.modificar(email, nuevoNombre, nuevaContrasena);
+    /**
+     * Modifica el usuario identificado por 'emailActual'. Si necesita usar otro criterio,
+     * cambiar el primer parámetro a la clave apropiada.
+     */
+    public void modificarUsuario(UsuarioService usuarioService, String emailActual, String nuevoEmail, String nuevoNombre, String nuevaContrasena) {
+        Usuario u = usuarioService.buscarPorCorreo(emailActual);
+        if (u != null) {
+            u.setEmail(nuevoEmail);
+            u.setNombre(nuevoNombre);
+            u.setContrasena(nuevaContrasena);
+            usuarioService.actualizar(u);
+        }
     }
 
     public void listarUsuarios(UsuarioService usuarioService) {
-        usuarioService.listar();
+        for (Usuario u : usuarioService.listar()) {
+            System.out.println(u);
+        }
     }
 
     public void buscarUsuario(UsuarioService usuarioService, String email) {
