@@ -1,5 +1,6 @@
 package com.grupo2.cinemautn.persistence;
 import com.grupo2.cinemautn.models.usuarios.Usuario;
+import com.grupo2.cinemautn.models.usuarios.Rol;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,9 +20,12 @@ public class GestoraUsuariosJSON {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject();
-            //TODO: completar con los atributos de Usuario
-            //jsonObject.put("nombre", u.getNombre());
-            //jsonObject.put("edad", u.getEdad());
+            // Guardar atributos esenciales
+            jsonObject.put("nombre", u.getNombre());
+            jsonObject.put("email", u.getEmail());
+            jsonObject.put("contrasena", u.getContrasena());
+            jsonObject.put("estado", u.isEstado());
+            jsonObject.put("rol", u.getRol() != null ? u.getRol().name() : JSONObject.NULL);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -46,8 +50,9 @@ public class GestoraUsuariosJSON {
 
     public ArrayList<Usuario> archivoALista(String nombreArchivo) {
         JSONTokener tokener = OperacionesLectoEscritura.leer(nombreArchivo);
-        ArrayList<Usuario> lista = null;
+        ArrayList<Usuario> lista = new ArrayList<>();
         try {
+            if (tokener == null) return lista; // archivo no existe -> lista vacía
             lista = deserializarLista(new JSONArray(tokener));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -59,9 +64,17 @@ public class GestoraUsuariosJSON {
     public Usuario deserializar (JSONObject jsonObject) {
         Usuario u = new Usuario();
         try {
-            // TODO: completar con los atributos de Usuario
-            //u.setNombre(jsonObject.getString("nombre"));
-            //u.setEdad(jsonObject.getInt("edad"));
+            if (jsonObject.has("nombre") && !jsonObject.isNull("nombre")) u.setNombre(jsonObject.getString("nombre"));
+            if (jsonObject.has("email") && !jsonObject.isNull("email")) u.setEmail(jsonObject.getString("email"));
+            if (jsonObject.has("contrasena") && !jsonObject.isNull("contrasena")) u.setContrasena(jsonObject.getString("contrasena"));
+            if (jsonObject.has("estado") && !jsonObject.isNull("estado")) u.setEstado(jsonObject.getBoolean("estado"));
+            if (jsonObject.has("rol") && !jsonObject.isNull("rol")) {
+                try {
+                    u.setRol(Rol.valueOf(jsonObject.getString("rol")));
+                } catch (IllegalArgumentException e) {
+                    // rol desconocido, dejar null
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

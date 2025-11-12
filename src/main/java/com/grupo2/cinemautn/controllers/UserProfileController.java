@@ -97,8 +97,6 @@ public class UserProfileController {
     private void setEditable(boolean editable) {
         txtNombre.setEditable(editable);
         txtCorreo.setEditable(editable);
-        txtTelefono.setEditable(editable);
-        txtDireccion.setEditable(editable);
 
         btnEditar.setDisable(editable);
         btnGuardar.setDisable(!editable);

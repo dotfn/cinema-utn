@@ -1,0 +1,16 @@
+[
+    {
+        "estado": true,
+        "contrasena": "123",
+        "nombre": "m",
+        "email": "mail",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "nombre": "nico",
+        "email": "nicomail",
+        "rol": "BASE"
+    }
+]

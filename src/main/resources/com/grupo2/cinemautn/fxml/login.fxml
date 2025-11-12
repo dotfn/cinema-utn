@@ -25,6 +25,7 @@
                 <Label text="Contraseña🔐" style="-fx-font-size: 14px;" />
                 <PasswordField fx:id="passwordField" promptText="********" />
                 <Button fx:id="loginButton" text="Iniciar Sesión" onAction="#onLogin" />
+                <Label fx:id="statusLabel" text="" style="-fx-text-fill: #d00;" />
                 <VBox spacing="5" alignment="CENTER">
                     <Label text="¿No tienes una cuenta?" />
                     <Hyperlink fx:id="registerLink" text="Regístrate aquí" onAction="#onRegister" />
