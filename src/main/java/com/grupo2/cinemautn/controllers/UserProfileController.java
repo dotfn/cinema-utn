@@ -18,9 +18,6 @@ public class UserProfileController {
     @FXML private ImageView profileImage;
     @FXML private TextField txtNombre;
     @FXML private TextField txtCorreo;
-    @FXML private TextField txtTelefono;
-    @FXML private TextField txtDireccion;
-    @FXML private TextField txtContrasenia;
     @FXML private Button btnEditar;
     @FXML private Button btnGuardar;
     @FXML private Button btnCancelar;
@@ -30,13 +27,11 @@ public class UserProfileController {
     // Datos simulados (mock)
     private String nombre = "Juan Pérez";
     private String correo = "juan.perez@correo.com";
-    private String contrasenia = "********";
 
 
     // Copias temporales para revertir
     private String tempNombre;
     private String tempCorreo;
-    private String tempContrasenia;
 
     // Usuario actual en la sesión (puede venir de setUser o de SesionActivaService)
     private Usuario usuarioActual;
@@ -61,7 +56,6 @@ public class UserProfileController {
     private void loadMockUserData() {
         txtNombre.setText(nombre);
         txtCorreo.setText(correo);
-        txtContrasenia.setText(contrasenia);
 
     }
 
@@ -69,7 +63,6 @@ public class UserProfileController {
     private void onEditar() {
         tempNombre = txtNombre.getText();
         tempCorreo = txtCorreo.getText();
-        tempContrasenia = txtContrasenia.getText();
 
         setEditable(true);
         updateStatus("Modo edición activado.");
@@ -79,8 +72,6 @@ public class UserProfileController {
     private void onGuardar() {
         nombre = txtNombre.getText();
         correo = txtCorreo.getText();
-        contrasenia = txtContrasenia.getText();
-        System.out.println("[DEBUG] Guardando cambios en perfil..." + contrasenia);
 
         // Si hay un usuario en sesión, actualizarlo también
         if (usuarioActual != null) {
@@ -124,7 +115,6 @@ public class UserProfileController {
     private void setEditable(boolean editable) {
         txtNombre.setEditable(editable);
         txtCorreo.setEditable(editable);
-        txtContrasenia.setEditable(editable);
 
         btnEditar.setDisable(editable);
         btnGuardar.setDisable(!editable);

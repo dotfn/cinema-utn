@@ -49,8 +49,6 @@
                     <Label text="Correo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                     <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                    // contraseña
-
                 </GridPane>
 
                 <!-- Botones -->
