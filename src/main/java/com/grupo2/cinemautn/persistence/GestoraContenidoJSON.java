@@ -35,6 +35,7 @@ public class GestoraContenidoJSON {
             jsonObject.put("director", c.getDirector());
             jsonObject.put("estado", c.isEstado());
             // nuevo campo imagenPortada
+            jsonObject.put("imagenPortada", c.getImagenPortada() != null ? c.getImagenPortada() : JSONObject.NULL);
 
             // tipo y campos específicos
             if (c instanceof Pelicula) {
@@ -129,6 +130,7 @@ public class GestoraContenidoJSON {
             }
             int anio = jsonObject.optInt("anio", 0);
             String director = jsonObject.optString("director", null);
+            String imagenPortada = jsonObject.optString("imagenPortada", null);
 
             // crear instancia segun tipo
             if (tipo == TipoContenido.PELICULA) {
@@ -142,8 +144,9 @@ public class GestoraContenidoJSON {
                 p.setId(jsonObject.optInt("id", 0));
                 // duracion es privado sin setter; usar reflexion? Pelicula no tiene setter, pero tiene campos privados.
                 // En lugar de reflection, creamos usando el constructor si tenemos todos los datos
-                p = new Pelicula(titulo, genero, anio, director, duracion);
                 p.setId(jsonObject.optInt("id", 0));
+                p.setImagenPortada(imagenPortada);
+                p = new Pelicula(titulo, genero, anio, director, duracion, imagenPortada);
                 c = p;
             } else if (tipo == TipoContenido.SERIE) {
                 int temporadas = jsonObject.optInt("temporadas", 0);
@@ -155,12 +158,10 @@ public class GestoraContenidoJSON {
                 s.setDirector(director);
                 s.setEstado(jsonObject.optBoolean("estado", true));
                 s.setId(jsonObject.optInt("id", 0));
-                s = new Serie(titulo, genero, anio, director, temporadas, episodios);
                 s.setId(jsonObject.optInt("id", 0));
+                s.setImagenPortada(imagenPortada);
+                s = new Serie(titulo, genero, anio, director, temporadas, episodios, imagenPortada);
                 c = s;
-            } else {
-                // tipo desconocido: no crear instancia concreta
-                // podemos devolver null y dejar que el llamador lo ignore
             }
 
             // calificaciones

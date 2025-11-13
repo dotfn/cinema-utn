@@ -23,13 +23,18 @@ public class Administrador extends Usuario{
     //metodos
 
     //gestion de contenido
-    public void crearContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios) {
-        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios);
+
+    // overload con imagenPortada para Serie
+    public void crearContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios, String imagenPortada) {
+        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios, imagenPortada);
         contenidoService.alta(contenido);
     }
 
-    public void crearContenido(String titulo, Genero genero, int anio, String director, double duracion) {
-        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion);
+
+
+    // overload con imagenPortada para Pelicula
+    public void crearContenido(String titulo, Genero genero, int anio, String director, double duracion, String imagenPortada) {
+        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion, imagenPortada);
         contenidoService.alta(contenido);
     }
 
@@ -37,13 +42,17 @@ public class Administrador extends Usuario{
         contenidoService.baja(contenido.getId());
     }
 
-    public void modificarContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios) {
-        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios);
+
+    // overload modificacion para Serie con imagen
+    public void modificarContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios, String imagenPortada) {
+        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios, imagenPortada);
         contenidoService.modificacion(contenido);
     }
 
-    public void modificarContenido(String titulo, Genero genero, int anio, String director, double duracion) {
-        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion);
+
+    // overload modificacion para Pelicula con imagen
+    public void modificarContenido(String titulo, Genero genero, int anio, String director, double duracion, String imagenPortada) {
+        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion, imagenPortada);
         contenidoService.modificacion(contenido);
     }
 

@@ -1,17 +1,14 @@
 package com.grupo2.cinemautn.models.contenido;
 
-import com.grupo2.cinemautn.models.calificacion.Calificacion;
-import javafx.scene.image.Image;
-
-import java.util.List;
-
 public class Pelicula extends Contenido {
     //Atributos
     private double duracion; // en horas
 
     //Construtor
-    public Pelicula(String titulo, Genero genero, int anio, String director, double duracion) {
-        super(titulo, genero, anio, director);
+
+    // Constructor que incluye imagenPortada
+    public Pelicula(String titulo, Genero genero, int anio, String director, double duracion, String imagenPortada) {
+        super(titulo, genero, anio, director, imagenPortada);
         this.duracion = duracion;
     }
 

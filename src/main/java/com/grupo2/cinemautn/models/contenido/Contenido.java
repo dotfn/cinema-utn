@@ -1,7 +1,6 @@
 package com.grupo2.cinemautn.models.contenido;
 
 import com.grupo2.cinemautn.models.calificacion.Calificacion;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,7 @@ public abstract class Contenido {
     protected boolean estado;
     protected List<Calificacion> calificaciones = new ArrayList<>();
     // nuevo atributo
+    protected String imagenPortada; // ruta o nombre de la imagen (String)
 
     public Contenido() {
         contador ++;
@@ -23,7 +23,7 @@ public abstract class Contenido {
         this.estado = true;
     }
 
-    public Contenido(String titulo, Genero genero, int anio, String director) {
+   /* public Contenido(String titulo, Genero genero, int anio, String director) {
         contador ++;
         this.id = contador;
         this.titulo = titulo;
@@ -31,6 +31,18 @@ public abstract class Contenido {
         this.anio = anio;
         this.director = director;
         this.estado = true;
+    }*/
+
+    // constructor adicional que incluye imagenPortada
+    public Contenido(String titulo, Genero genero, int anio, String director, String imagenPortada) {
+        contador ++;
+        this.id = contador;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.anio = anio;
+        this.director = director;
+        this.estado = true;
+        this.imagenPortada = imagenPortada;
     }
 
     public Contenido(String titulo, Genero genero, int anio, String director, List<Calificacion> calificaciones) {
@@ -75,6 +87,10 @@ public abstract class Contenido {
 
     public void agregarCalificacion(Calificacion calificacion) { calificaciones.add(calificacion); }
 
+    public String getImagenPortada() { return imagenPortada; }
+
+    public void setImagenPortada(String imagenPortada) { this.imagenPortada = imagenPortada; }
+
     // metodos
 
     public double promedioCalificaciones() {
@@ -88,6 +104,10 @@ public abstract class Contenido {
 
     @Override
     public String toString() {
-        return titulo + " (" + anio + ") - Dirigido por " + director;
+        String base = titulo + " (" + anio + ") - Dirigido por " + director;
+        if (imagenPortada != null && !imagenPortada.isEmpty()) {
+            base += " - Portada: " + imagenPortada;
+        }
+        return base;
     }
 }
