@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "titulo": "El Gran Viaje",
+    "genero": "ACCION",
+    "anio": 2023,
+    "director": "Lucía Martínez",
+    "estado": true,
+    "imagenPortada": "poster_el_gran_viaje.jpg",
+    "tipo": "PELICULA",
+    "duracion": 2.15,
+    "resenas": [
+      {
+        "idUsuario": "1",
+        "estrellas": 5,
+        "comentario": "Hermosa cinematografía y gran actuación.",
+        "estado": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Sombras del Horizonte",
+    "genero": "SUSPENSO",
+    "anio": 2022,
+    "director": "Martín Aguilar",
+    "estado": true,
+    "imagenPortada": "poster_sombras_horizonte.jpg",
+    "tipo": "PELICULA",
+    "duracion": 1.85,
+    "resenas": [
+      {
+        "idUsuario": "2",
+        "estrellas": 4,
+        "comentario": "Te mantiene al borde del asiento, gran ritmo narrativo.",
+        "estado": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Código Fragmentado",
+    "genero": "CIENCIA_FICCION",
+    "anio": 2024,
+    "director": "Sofía Rivas",
+    "estado": true,
+    "imagenPortada": "poster_codigo_fragmentado.jpg",
+    "tipo": "SERIE",
+    "duracion": 0.55,
+    "resenas": [
+      {
+        "idUsuario": "3",
+        "estrellas": 5,
+        "comentario": "Ideas buenísimas y worldbuilding sólido. Quedé manija del siguiente episodio.",
+        "estado": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "titulo": "La Última Torre",
+    "genero": "FANTASIA",
+    "anio": 2021,
+    "director": "Rodolfo Nieva",
+    "estado": true,
+    "imagenPortada": "poster_la_ultima_torre.jpg",
+    "tipo": "PELICULA",
+    "duracion": 2.4,
+    "resenas": [
+      {
+        "idUsuario": "4",
+        "estrellas": 3,
+        "comentario": "Linda propuesta visual, pero la trama podría haber tenido más desarrollo.",
+        "estado": true
+      }
+    ]
+  }
+]

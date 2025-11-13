@@ -95,33 +95,3 @@ public class Usuario {
         return Objects.equals(email, usuario.email);
     }
 }
-
-/*
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(email);
-    }
-
-    public static void actualizarContadorDesdeJSON(String rutaArchivo) {
-        try {
-            String contenido = new String(Files.readAllBytes(Paths.get(rutaArchivo)));
-            JSONArray array = new JSONArray(contenido);
-
-            int maxId = 0;
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject obj = array.getJSONObject(i);
-                int id = obj.getInt("id");
-                if (id > maxId) maxId = id;
-            }
-
-            contadorId = maxId; // 👈 actualizamos el contador con el último id usado
-            System.out.println("Contador de ID actualizado: " + contadorId);
-        } catch (Exception e) {
-            System.out.println("No se pudo leer el archivo JSON. Se iniciará desde 0.");
-        }
-    }
-
-
-    public void calificarContenido(int idContenido, int estrellas) {
-    }
- */

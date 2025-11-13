@@ -50,36 +50,6 @@ public class DashboardController implements Initializable {
         ObservableList<Contenido> items = tableView.getItems();
         items.setAll(contenidoService.listar());
 
-        // Hardcode: crear una película y una serie para mostrar en el dashboard
-        Pelicula peliculaHardcode = new Pelicula(
-                "El Gran Viaje",
-                Genero.ACCION,
-                2023,
-                "Lucía Martínez",
-                2.15,
-                "poster_el_gran_viaje.jpg"
-        );
-
-        Serie serieHardcode = new Serie(
-                "Misterios del Cosmos",
-                Genero.CIENCIA_FICCION,
-                2021,
-                "Ada Curie",
-                3,
-                24,
-                "poster_misterios_cosmos.jpg"
-        );
-
-        // Añadir los hardcodeados al listado que alimenta la TableView (no persiste en archivo)
-        items.addAll(peliculaHardcode, serieHardcode);
-
-        // Configurar las columnas de la tabla
-        colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getTitulo()));
-        colDescription.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGenero().toString()));
-        colDirector.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDirector()));
-
-
-
     }
 
     @FXML

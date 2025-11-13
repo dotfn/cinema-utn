@@ -1,6 +1,6 @@
 package com.grupo2.cinemautn.persistence;
 
-import com.grupo2.cinemautn.models.calificacion.Calificacion;
+import com.grupo2.cinemautn.models.resena.Resena;
 import com.grupo2.cinemautn.models.contenido.Contenido;
 import com.grupo2.cinemautn.models.contenido.Genero;
 import com.grupo2.cinemautn.models.contenido.Pelicula;
@@ -52,20 +52,19 @@ public class GestoraContenidoJSON {
                 jsonObject.put("tipo", JSONObject.NULL);
             }
 
-            // calificaciones (si existen)
-            JSONArray arrCal = new JSONArray();
-            if (c.getCalificaciones() != null) {
-                for (Calificacion cal : c.getCalificaciones()) {
-                    JSONObject jcal = new JSONObject();
-                    jcal.put("id", cal.getId());
-                    jcal.put("idUsuario", cal.getIdUsuario());
-                    jcal.put("idContenido", cal.getIdContenido());
-                    jcal.put("estrellas", cal.getEstrellas());
-                    jcal.put("estado", cal.isEstado());
-                    arrCal.put(jcal);
+            // resenas (si existen)
+            JSONArray arrRes = new JSONArray();
+            if (c.getResenas() != null) {
+                for (Resena res : c.getResenas()) {
+                    JSONObject jres = new JSONObject();
+                    jres.put("id", res.getId());
+                    jres.put("idUsuario", res.getIdUsuario());
+                    jres.put("estrellas", res.getEstrellas());
+                    jres.put("estado", res.isEstado());
+                    arrRes.put(jres);
                 }
             }
-            jsonObject.put("calificaciones", arrCal);
+            jsonObject.put("resenas", arrRes);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -164,21 +163,20 @@ public class GestoraContenidoJSON {
                 c = s;
             }
 
-            // calificaciones
+            // resenas
             if (c != null) {
-                c.setCalificaciones(new ArrayList<>());
-                JSONArray arrCal = jsonObject.optJSONArray("calificaciones");
-                if (arrCal != null) {
-                    for (int i = 0; i < arrCal.length(); i++) {
-                        JSONObject jcal = arrCal.optJSONObject(i);
-                        if (jcal != null) {
-                            Calificacion cal = new Calificacion();
-                            cal.setId(jcal.optInt("id", 0));
-                            cal.setIdUsuario(jcal.optInt("idUsuario", 0));
-                            cal.setIdContenido(jcal.optInt("idContenido", 0));
-                            cal.setEstrellas(jcal.optDouble("estrellas", 0));
-                            cal.setEstado(jcal.optBoolean("estado", true));
-                            c.agregarCalificacion(cal);
+                c.setResenas(new ArrayList<>());
+                JSONArray arrRes = jsonObject.optJSONArray("resenas");
+                if (arrRes != null) {
+                    for (int i = 0; i < arrRes.length(); i++) {
+                        JSONObject jres = arrRes.optJSONObject(i);
+                        if (jres != null) {
+                            Resena res = new Resena();
+                            res.setId(jres.optInt("id", 0));
+                            res.setIdUsuario(jres.optInt("idUsuario", 0));
+                            res.setEstrellas(jres.optInt("estrellas", 0));
+                            res.setEstado(jres.optBoolean("estado", true));
+                            c.agregarResena(res);
                         }
                     }
                 }
