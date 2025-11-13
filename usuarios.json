@@ -2,7 +2,15 @@
     {
         "estado": true,
         "contrasena": "123",
-        "id": 3,
+        "id": 1,
+        "nombre": "mateo maldini",
+        "email": "mateomaldini@gmail.com",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "id": 2,
         "nombre": "mateo 2",
         "email": "mateom@gmail.com",
         "rol": "BASE"
@@ -10,9 +18,9 @@
     {
         "estado": true,
         "contrasena": "123",
-        "id": 4,
-        "nombre": "mateom",
-        "email": "mateomaldini@gmail.com",
+        "id": 5,
+        "nombre": "nico",
+        "email": "nico@gmail.com",
         "rol": "BASE"
     }
 ]

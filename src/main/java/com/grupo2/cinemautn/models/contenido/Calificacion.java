@@ -9,6 +9,9 @@ public class Calificacion {
     private boolean estado; // por ejemplo: activa/inactiva
 
     // Constructor
+    public Calificacion() {
+    }
+
     public Calificacion(int id, int idUsuario, int idContenido, double estrellas, boolean estado) {
         this.id = id;
         this.idUsuario = idUsuario;

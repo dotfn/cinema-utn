@@ -2,6 +2,7 @@ package com.grupo2.cinemautn.controllers;
 
 import com.grupo2.cinemautn.models.usuarios.Usuario;
 import com.grupo2.cinemautn.service.SesionActivaService;
+import com.grupo2.cinemautn.service.UsuarioService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,6 +38,9 @@ public class UserProfileController {
     // Usuario actual en la sesión (puede venir de setUser o de SesionActivaService)
     private Usuario usuarioActual;
 
+    // Servicio para persistencia de usuarios
+    private UsuarioService usuarioService = new UsuarioService();
+
 
     @FXML
     private void initialize() {
@@ -44,7 +48,7 @@ public class UserProfileController {
         setEditable(false);
         // Intentar cargar usuario desde SesionActivaService
         if (this.usuarioActual == null) {
-            this.usuarioActual = com.grupo2.cinemautn.service.SesionActivaService.getInstance().getUsuario();
+            this.usuarioActual = SesionActivaService.getInstance().getUsuario();
         }
         if (this.usuarioActual != null) {
             setUser(this.usuarioActual);
@@ -65,6 +69,7 @@ public class UserProfileController {
     private void onEditar() {
         tempNombre = txtNombre.getText();
         tempCorreo = txtCorreo.getText();
+        tempContrasena = txtContrasena.getText();
         setEditable(true);
         updateStatus("Modo edición activado.");
     }
@@ -78,7 +83,18 @@ public class UserProfileController {
         // Si hay un usuario en sesión, actualizarlo también
         if (usuarioActual != null) {
             usuarioActual.setNombre(nombre);
-            // no cambiamos email por ahora
+            // permitir cambiar email si el servicio lo valida
+            if (correo != null && !correo.isBlank()) {
+                usuarioActual.setEmail(correo);
+            }
+            if (contrasena != null && !contrasena.isBlank()) {
+                usuarioActual.setContrasena(contrasena);
+            }
+
+            // Persistir cambios usando UsuarioService (ABMCL.modificacion)
+            usuarioService.modificacion(usuarioActual);
+
+            // Actualizar la sesión activa
             SesionActivaService.getInstance().setUsuario(usuarioActual);
         }
 
@@ -94,6 +110,7 @@ public class UserProfileController {
     private void onCancelar() {
         txtNombre.setText(tempNombre);
         txtCorreo.setText(tempCorreo);
+        txtContrasena.setText(tempContrasena);
 
         setEditable(false);
         updateStatus("Cambios cancelados.");
@@ -139,6 +156,7 @@ public class UserProfileController {
         if (usuarioActual != null) {
             txtNombre.setText(usuarioActual.getNombre() != null ? usuarioActual.getNombre() : "");
             txtCorreo.setText(usuarioActual.getEmail() != null ? usuarioActual.getEmail() : "");
+            txtContrasena.setText(usuarioActual.getContrasena() != null ? usuarioActual.getContrasena() : "");
         }
     }
 }

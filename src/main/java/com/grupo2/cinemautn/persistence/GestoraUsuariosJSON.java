@@ -7,15 +7,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class GestoraUsuariosJSON {
 
     private static final String DEFAULT_FILE = "usuarios.json";
 
-    //  SERIALIZAR
-    public void listaToArchivo(ArrayList<Usuario> lista) {
-        OperacionesLectoEscritura.grabar (DEFAULT_FILE, serializarLista(lista));
-
+    // Método genérico para aceptar cualquier colección de usuarios
+    public <C extends Collection<Usuario>> void listaToArchivo(C lista) {
+        ArrayList<Usuario> arrayListUsuarios = new ArrayList<>(lista);
+        OperacionesLectoEscritura.grabar(DEFAULT_FILE, serializarLista(arrayListUsuarios));
     }
 
     public JSONObject serializar(Usuario u) {
