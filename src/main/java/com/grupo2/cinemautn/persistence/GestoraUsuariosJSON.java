@@ -11,7 +11,7 @@ import java.util.Collection;
 
 public class GestoraUsuariosJSON {
 
-    private static final String DEFAULT_FILE = "usuarios.json";
+    private static final String DEFAULT_FILE = "data/usuarios.json";
 
     // Método genérico para aceptar cualquier colección de usuarios
     public <C extends Collection<Usuario>> void listaToArchivo(C lista) {

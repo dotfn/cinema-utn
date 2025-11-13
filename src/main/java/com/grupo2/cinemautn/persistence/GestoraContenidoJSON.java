@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class GestoraContenidoJSON {
-    private static final String DEFAULT_FILE = "contenido.json";
+    private static final String DEFAULT_FILE = "data/contenido.json";
 
     //  SERIALIZAR
     public <C extends Collection<Contenido>> void listaToArchivo(C lista) {

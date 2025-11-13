@@ -12,10 +12,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+// Nuevos imports para instanciar Pelicula y Serie
+import com.grupo2.cinemautn.models.contenido.Pelicula;
+import com.grupo2.cinemautn.models.contenido.Serie;
+import com.grupo2.cinemautn.models.contenido.Genero;
 
 public class DashboardController implements Initializable {
 
@@ -41,13 +47,36 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Inicializar la tabla con los contenidos
         ContenidoService contenidoService = new ContenidoService();
-        tableView.getItems().setAll(contenidoService.listar());
+        ObservableList<Contenido> items = tableView.getItems();
+        items.setAll(contenidoService.listar());
+
+        // Hardcode: crear una película y una serie para mostrar en el dashboard
+        Pelicula peliculaHardcode = new Pelicula(
+                "El Gran Viaje",
+                Genero.ACCION,
+                2023,
+                "Lucía Martínez",
+                2.15,
+                "poster_el_gran_viaje.jpg"
+        );
+
+        Serie serieHardcode = new Serie(
+                "Misterios del Cosmos",
+                Genero.CIENCIA_FICCION,
+                2021,
+                "Ada Curie",
+                3,
+                24,
+                "poster_misterios_cosmos.jpg"
+        );
+
+        // Añadir los hardcodeados al listado que alimenta la TableView (no persiste en archivo)
+        items.addAll(peliculaHardcode, serieHardcode);
 
         // Configurar las columnas de la tabla
         colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getTitulo()));
         colDescription.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGenero().toString()));
         colDirector.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDirector()));
-
 
 
 
