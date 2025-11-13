@@ -50,9 +50,6 @@
                             <Label fx:id="lblDuracion" text="-" />
                         </HBox>
 
-                        <Label text="Sinopsis:" style="-fx-font-weight:bold; -fx-padding:6 0 0 0;" />
-                        <TextArea fx:id="txtDescripcionHeader" prefRowCount="4" wrapText="true" editable="false" style="-fx-background-color:transparent; -fx-control-inner-background:transparent; -fx-padding:0;" />
-
                         <HBox spacing="8" style="-fx-padding:6 0 0 0;">
                             <Button text="Ver detalles" onAction="#onVerDetalles" />
                             <Button text="Reproducir trailer" onAction="#onReproducirTrailer" />
@@ -81,7 +78,8 @@
                 <TableView fx:id="tableView" prefHeight="300.0" prefWidth="760.0" >
                     <columns>
                         <TableColumn fx:id="colNombre" text="Nombre" prefWidth="240.0" />
-                        <TableColumn fx:id="colDescription" text="Descripción" prefWidth="420.0" />
+                        <TableColumn fx:id="colDuracion" text="Duración" prefWidth="160.0" />
+                        <TableColumn fx:id="colGenero" text="Género" prefWidth="160.0" />
                         <TableColumn fx:id="colDirector" text="Director" prefWidth="200.0" />
                     </columns>
                     <placeholder>
