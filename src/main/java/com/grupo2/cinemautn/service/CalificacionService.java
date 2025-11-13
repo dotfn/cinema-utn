@@ -1,7 +1,7 @@
 package com.grupo2.cinemautn.service;
 
 import com.grupo2.cinemautn.interfaces.ABMCL;
-import com.grupo2.cinemautn.models.contenido.Calificacion;
+import com.grupo2.cinemautn.models.calificacion.Calificacion;
 
 import java.util.ArrayList;
 import java.util.List;

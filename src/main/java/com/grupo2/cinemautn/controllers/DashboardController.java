@@ -1,6 +1,7 @@
 package com.grupo2.cinemautn.controllers;
 
 import com.grupo2.cinemautn.models.contenido.Contenido;
+import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.SesionActivaService;
 import com.grupo2.cinemautn.models.usuarios.Usuario;
 import javafx.fxml.FXML;
@@ -38,6 +39,17 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Inicializar la tabla con los contenidos
+        ContenidoService contenidoService = new ContenidoService();
+        tableView.getItems().setAll(contenidoService.listar());
+
+        // Configurar las columnas de la tabla
+        colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getTitulo()));
+        colDescription.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getGenero().toString()));
+        colDirector.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDirector()));
+
+
+
 
     }
 

@@ -1,5 +1,8 @@
 package com.grupo2.cinemautn.models.contenido;
 
+import com.grupo2.cinemautn.models.calificacion.Calificacion;
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,7 @@ public abstract class Contenido {
     protected String director;
     protected boolean estado;
     protected List<Calificacion> calificaciones = new ArrayList<>();
+    // nuevo atributo
 
     public Contenido() {
         contador ++;
@@ -25,10 +29,20 @@ public abstract class Contenido {
         this.titulo = titulo;
         this.genero = genero;
         this.anio = anio;
-        this.estado = true;
         this.director = director;
+        this.estado = true;
     }
 
+    public Contenido(String titulo, Genero genero, int anio, String director, List<Calificacion> calificaciones) {
+        contador ++;
+        this.id = contador;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.anio = anio;
+        this.director = director;
+        this.estado = true;
+        this.calificaciones = calificaciones;
+    }
 
     // setters y getters
     public int getId() { return id; }

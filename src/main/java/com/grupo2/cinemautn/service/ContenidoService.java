@@ -3,6 +3,8 @@ package com.grupo2.cinemautn.service;
 import com.grupo2.cinemautn.exceptions.ContenidoNoEncontradoException;
 import com.grupo2.cinemautn.interfaces.ABMCL;
 import com.grupo2.cinemautn.models.contenido.Contenido;
+import com.grupo2.cinemautn.persistence.GestoraPeliculasJSON;
+import com.grupo2.cinemautn.persistence.GestoraSeriesJSON;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +13,8 @@ import java.util.Map;
 
 public class ContenidoService implements ABMCL<Contenido> {
     private Map<Integer, Contenido> contenidos = new HashMap<>();
+    private GestoraPeliculasJSON gestoraPeliculasJSON;
+    private GestoraSeriesJSON gestoraSeriesJSON;
 
 
     // interfaz ABMCL

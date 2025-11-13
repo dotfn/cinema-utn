@@ -1,4 +1,4 @@
-package com.grupo2.cinemautn.models.contenido;
+package com.grupo2.cinemautn.models.calificacion;
 
 public class Calificacion {
     //Atributos

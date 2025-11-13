@@ -1,20 +1,22 @@
 package com.grupo2.cinemautn.persistence;
 import com.grupo2.cinemautn.models.contenido.Pelicula;
 
+import com.grupo2.cinemautn.models.contenido.Serie;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class GestoraPeliculasJSON {
 
     private static final String DEFAULT_FILE = "peliculas.json";
 
     //  SERIALIZAR
-    public void listaToArchivo(ArrayList<Pelicula> lista) {
-        OperacionesLectoEscritura.grabar (DEFAULT_FILE, serializarLista(lista));
-
+    public <C extends Collection<Pelicula>> void listaToArchivo(C lista) {
+        ArrayList<Pelicula> arrayListPelicula = new ArrayList<>(lista);
+        OperacionesLectoEscritura.grabar(DEFAULT_FILE, serializarLista(arrayListPelicula));
     }
 
     public JSONObject serializar(Pelicula p) {

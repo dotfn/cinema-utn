@@ -1,5 +1,10 @@
 package com.grupo2.cinemautn.models.contenido;
 
+import com.grupo2.cinemautn.models.calificacion.Calificacion;
+import javafx.scene.image.Image;
+
+import java.util.List;
+
 public class Pelicula extends Contenido {
     //Atributos
     private double duracion; // en horas
@@ -9,6 +14,7 @@ public class Pelicula extends Contenido {
         super(titulo, genero, anio, director);
         this.duracion = duracion;
     }
+
     public Pelicula(){
         super();
     }
