@@ -44,6 +44,10 @@
                     <Label text="Repetir contraseña:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
                     <PasswordField fx:id="confirmPasswordField" promptText="********" GridPane.rowIndex="3" GridPane.columnIndex="1" />
 
+                    <!-- Nuevo campo: Rol -->
+                    <Label text="Rol:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="cmbRol" GridPane.rowIndex="4" GridPane.columnIndex="1" promptText="Seleccione rol" />
+
                 </GridPane>
 
                 <HBox alignment="CENTER_LEFT" spacing="8">
@@ -69,4 +73,3 @@
 
     </BorderPane>
 </AnchorPane>
-

@@ -50,7 +50,11 @@
                     <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
                     <Label text="Cotraseña:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                    <TextField fx:id="txtContrasena" promptText="*************" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <PasswordField fx:id="txtContrasena" promptText="*************" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <!-- Nuevo campo: Rol -->
+                    <Label text="Rol:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="cmbRol" GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="Seleccione rol"/>
 
                 </GridPane>
 

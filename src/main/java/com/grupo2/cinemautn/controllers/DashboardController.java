@@ -85,4 +85,20 @@ public class DashboardController implements Initializable {
         stage.show();
 
     }
+
+    @FXML
+    public void onLogout(javafx.event.ActionEvent event) throws IOException {
+        // Limpiar la sesión activa
+        SesionActivaService.getInstance().clear();
+
+        // Volver a la pantalla de login
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/login.fxml"));
+        javafx.scene.Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Login");
+        stage.show();
+    }
 }

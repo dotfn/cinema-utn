@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -30,9 +31,20 @@ public class RegisterController {
     @FXML private Button btnCrear;
     @FXML private Button btnCancelar;
     @FXML private Label statusLabel;
+    @FXML private ComboBox<Rol> cmbRol; // nuevo
 
     private UsuarioService usuarioService = new UsuarioService();
     private final GestoraUsuariosJSON gestoraUsuarios = new GestoraUsuariosJSON();
+
+    @FXML
+    public void initialize() {
+        // Inicializar el ComboBox de roles con opciones BASE y PREMIUM
+        if (cmbRol != null) {
+            cmbRol.getItems().clear();
+            cmbRol.getItems().addAll(Rol.BASE, Rol.PREMIUM);
+            cmbRol.setValue(Rol.BASE); // por defecto
+        }
+    }
 
     @FXML
     public void onCrearUsuario(javafx.event.ActionEvent event) throws IOException {
@@ -66,8 +78,14 @@ public class RegisterController {
             return;
         }
 
-        // Crear usuario con rol BASE por defecto y añadir a la lista
-        Usuario nuevo = new Usuario(nombre, email, pass, Rol.BASE);
+        // Obtener rol seleccionado (por defecto BASE si null)
+        Rol rolSeleccionado = Rol.BASE;
+        if (cmbRol != null && cmbRol.getValue() != null) {
+            rolSeleccionado = cmbRol.getValue();
+        }
+
+        // Crear usuario con rol seleccionado y añadir a la lista
+        Usuario nuevo = new Usuario(nombre, email, pass, rolSeleccionado);
         usuarios.add(nuevo);
         // Persistir
         gestoraUsuarios.listaToArchivo(usuarios);

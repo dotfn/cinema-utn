@@ -1,11 +1,19 @@
 [
     {
         "estado": true,
-        "contrasena": "123",
+        "contrasena": "admin",
         "id": 1,
-        "nombre": "mateo maldini",
-        "email": "mateomaldini@gmail.com",
-        "rol": "BASE"
+        "nombre": "admin",
+        "email": "admin@gmail.com",
+        "rol": "ADMINISTRADOR"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "id": 7,
+        "nombre": "user1",
+        "email": "user1@gmail.com",
+        "rol": "PREMIUM"
     },
     {
         "estado": true,

@@ -1,6 +1,7 @@
 package com.grupo2.cinemautn.controllers;
 
 import com.grupo2.cinemautn.models.usuarios.Usuario;
+import com.grupo2.cinemautn.models.usuarios.Rol;
 import com.grupo2.cinemautn.service.SesionActivaService;
 import com.grupo2.cinemautn.service.UsuarioService;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class UserProfileController {
     @FXML private Button btnBack;
     @FXML private Label statusLabel;
     @FXML private TextField txtContrasena;
+    @FXML private ComboBox<Rol> cmbRol; // nuevo
 
     // Datos simulados (mock)
     private String nombre = "Juan Pérez";
@@ -35,6 +37,7 @@ public class UserProfileController {
     private String tempNombre;
     private String tempCorreo;
     private String tempContrasena;
+    private Rol tempRol;
     // Usuario actual en la sesión (puede venir de setUser o de SesionActivaService)
     private Usuario usuarioActual;
 
@@ -46,6 +49,12 @@ public class UserProfileController {
     private void initialize() {
         System.out.println("[DEBUG] Inicializando controlador de perfil...");
         setEditable(false);
+        // Inicializar ComboBox de roles
+        if (cmbRol != null) {
+            cmbRol.getItems().clear();
+            cmbRol.getItems().addAll(Rol.BASE, Rol.PREMIUM);
+            cmbRol.setValue(Rol.BASE);
+        }
         // Intentar cargar usuario desde SesionActivaService
         if (this.usuarioActual == null) {
             this.usuarioActual = SesionActivaService.getInstance().getUsuario();
@@ -62,6 +71,7 @@ public class UserProfileController {
         txtNombre.setText(nombre);
         txtCorreo.setText(correo);
         txtContrasena.setText("********");
+        if (cmbRol != null) cmbRol.setValue(Rol.BASE);
 
     }
 
@@ -70,6 +80,7 @@ public class UserProfileController {
         tempNombre = txtNombre.getText();
         tempCorreo = txtCorreo.getText();
         tempContrasena = txtContrasena.getText();
+        tempRol = cmbRol != null ? cmbRol.getValue() : null;
         setEditable(true);
         updateStatus("Modo edición activado.");
     }
@@ -79,6 +90,7 @@ public class UserProfileController {
         nombre = txtNombre.getText();
         correo = txtCorreo.getText();
         contrasena = txtContrasena.getText();
+        Rol seleccionado = cmbRol != null ? cmbRol.getValue() : null;
 
         // Si hay un usuario en sesión, actualizarlo también
         if (usuarioActual != null) {
@@ -89,6 +101,9 @@ public class UserProfileController {
             }
             if (contrasena != null && !contrasena.isBlank()) {
                 usuarioActual.setContrasena(contrasena);
+            }
+            if (seleccionado != null) {
+                usuarioActual.setRol(seleccionado);
             }
 
             // Persistir cambios usando UsuarioService (ABMCL.modificacion)
@@ -102,6 +117,7 @@ public class UserProfileController {
         System.out.println("  - Nombre: " + nombre);
         System.out.println("  - Correo: " + correo);
         System.out.println("  - Contraseña: " + contrasena);
+        System.out.println("  - Rol: " + seleccionado);
         setEditable(false);
         updateStatus("Cambios guardados correctamente.");
     }
@@ -111,6 +127,7 @@ public class UserProfileController {
         txtNombre.setText(tempNombre);
         txtCorreo.setText(tempCorreo);
         txtContrasena.setText(tempContrasena);
+        if (cmbRol != null) cmbRol.setValue(tempRol);
 
         setEditable(false);
         updateStatus("Cambios cancelados.");
@@ -135,6 +152,7 @@ public class UserProfileController {
         txtNombre.setEditable(editable);
         txtCorreo.setEditable(editable);
         txtContrasena.setEditable(editable);
+        if (cmbRol != null) cmbRol.setDisable(!editable);
 
         btnEditar.setDisable(editable);
         btnGuardar.setDisable(!editable);
@@ -157,6 +175,7 @@ public class UserProfileController {
             txtNombre.setText(usuarioActual.getNombre() != null ? usuarioActual.getNombre() : "");
             txtCorreo.setText(usuarioActual.getEmail() != null ? usuarioActual.getEmail() : "");
             txtContrasena.setText(usuarioActual.getContrasena() != null ? usuarioActual.getContrasena() : "");
+            if (cmbRol != null && usuarioActual.getRol() != null) cmbRol.setValue(usuarioActual.getRol());
         }
     }
 }

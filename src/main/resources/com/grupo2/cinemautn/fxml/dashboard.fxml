@@ -28,7 +28,7 @@
                 <Button text="Peliculas" maxWidth="Infinity" />
                 <Button text="Series" maxWidth="Infinity" />
                 <Region VBox.vgrow="ALWAYS" />
-                <Button text="Logout" maxWidth="Infinity" />
+                <Button text="Logout" maxWidth="Infinity" onAction="#onLogout" />
             </VBox>
         </left>
 
