@@ -120,7 +120,8 @@ public class DetalleController {
                     rr.setPartialRating(false);
                     rr.setMax(5);
                     rr.setRating(r.getEstrellas());
-                    Text comentario = new Text(r.toString());
+                    String texto = r.getComentario() != null ? r.getComentario() : "(sin comentario)";
+                    Text comentario = new Text(texto);
                     comentario.wrappingWidthProperty().bind(reviewsContainer.widthProperty().subtract(60));
 
                     user.setStyle("-fx-font-weight:bold;");
@@ -148,7 +149,7 @@ public class DetalleController {
         Usuario u = SesionActivaService.getInstance().getUsuario();
         int idUsuario = (u != null) ? u.getIdUsuario() : 0;
 
-        Resena r = new Resena(idUsuario, estrellas, texto != null ? new StringBuilder(texto) : new StringBuilder());
+        Resena r = new Resena(idUsuario, estrellas, texto != null ? texto : null);
 
         if (contenido.getResenas() == null) contenido.setResenas(new ArrayList<>());
         contenido.agregarResena(r);

@@ -57,6 +57,7 @@ public class GestoraContenidoJSON {
                 jr.put("idUsuario", r.getIdUsuario());
                 jr.put("estrellas", r.getEstrellas());
                 jr.put("estado", r.isEstado());
+                jr.put("comentario", r.getComentario() != null ? r.getComentario() : JSONObject.NULL);
                 arr.put(jr);
             }
         }
@@ -124,6 +125,7 @@ public class GestoraContenidoJSON {
                 r.setIdUsuario(jr.optInt("idUsuario", 0));
                 r.setEstrellas(jr.optInt("estrellas", 0));
                 r.setEstado(jr.optBoolean("estado", true));
+                r.setComentario(jr.optString("comentario", null));
                 c.agregarResena(r);
             }
         }

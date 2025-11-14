@@ -6,19 +6,20 @@ public class Resena {
     private int id;
     private int idUsuario;
     private int estrellas;
-    private StringBuilder cometario;
+    private String comentario; // ahora guardamos el comentario como String
     private boolean estado;
 
-    // Constructor
+    // Constructor vacío
     public Resena() {
     }
 
-    public Resena(int idUsuario, int estrellas, StringBuilder cometario) {
+    // Constructor con comentario
+    public Resena(int idUsuario, int estrellas, String comentario) {
         contador ++;
         this.id = contador;
         this.idUsuario = idUsuario;
         this.estrellas = estrellas;
-        this.cometario = cometario;
+        this.comentario = comentario;
         this.estado = true;
     }
 
@@ -34,7 +35,7 @@ public class Resena {
 
     public boolean isEstado() {return estado;}
     public void setEstado(boolean estado) {this.estado = estado;}
+
+    public String getComentario() { return comentario; }
+    public void setComentario(String comentario) { this.comentario = comentario; }
 }
-
-
-

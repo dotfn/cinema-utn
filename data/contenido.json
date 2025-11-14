@@ -10,12 +10,14 @@
                 "estado": true,
                 "idUsuario": 1,
                 "id": 0,
+                "comentario": null,
                 "estrellas": 5
             },
             {
                 "estado": true,
                 "idUsuario": 7,
                 "id": 1,
+                "comentario": null,
                 "estrellas": 5
             }
         ],
@@ -34,6 +36,7 @@
             "estado": true,
             "idUsuario": 2,
             "id": 0,
+            "comentario": null,
             "estrellas": 4
         }],
         "titulo": "Matrix",
@@ -53,37 +56,50 @@
                 "estado": true,
                 "idUsuario": 3,
                 "id": 0,
+                "comentario": null,
                 "estrellas": 5
             },
             {
                 "estado": true,
                 "idUsuario": 12,
                 "id": 1,
+                "comentario": null,
                 "estrellas": 4
             },
             {
                 "estado": true,
                 "idUsuario": 7,
                 "id": 2,
+                "comentario": "impresionante animacion y trama",
                 "estrellas": 5
             },
             {
                 "estado": true,
                 "idUsuario": 18,
                 "id": 3,
+                "comentario": null,
                 "estrellas": 3
             },
             {
                 "estado": true,
                 "idUsuario": 25,
                 "id": 4,
+                "comentario": null,
                 "estrellas": 4
             },
             {
                 "estado": true,
                 "idUsuario": 9,
                 "id": 5,
+                "comentario": "excelente serie para toda la familia",
                 "estrellas": 5
+            },
+            {
+                "estado": true,
+                "idUsuario": 7,
+                "id": 1,
+                "comentario": "la verdad que la pelicula es mas mala que borja",
+                "estrellas": 1
             }
         ],
         "titulo": "DRAGON",
@@ -101,6 +117,7 @@
             "estado": true,
             "idUsuario": 4,
             "id": 0,
+            "comentario": null,
             "estrellas": 3
         }],
         "titulo": "NIÑO COHETE",
