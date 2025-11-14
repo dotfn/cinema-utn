@@ -4,6 +4,7 @@ import com.grupo2.cinemautn.models.contenido.Contenido;
 import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.SesionActivaService;
 import com.grupo2.cinemautn.models.usuarios.Usuario;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -130,7 +131,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void onVerDetalles(javafx.event.ActionEvent event) throws IOException {
+    public void onVerDetalles(ActionEvent event) throws IOException {
 
         // Navegar al detalle y pasar el contenido seleccionado
         Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
@@ -185,7 +186,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void onUserProfile(javafx.event.ActionEvent event) throws IOException {
+    public void onUserProfile(ActionEvent event) throws IOException {
 
         // Navegar al userProfile
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/userProfile.fxml"));
@@ -205,7 +206,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void onLogout(javafx.event.ActionEvent event) throws IOException {
+    public void onLogout(ActionEvent event) throws IOException {
         // Limpiar la sesión activa
         SesionActivaService.getInstance().clear();
 

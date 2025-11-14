@@ -1,6 +1,14 @@
 [
     {
         "estado": true,
+        "contrasena": "12388",
+        "id": 9,
+        "nombre": "Mm88",
+        "email": "mm88@mm.com",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
         "contrasena": "123",
         "id": 2,
         "nombre": "mateo 2",
@@ -10,9 +18,9 @@
     {
         "estado": true,
         "contrasena": "123",
-        "id": 5,
-        "nombre": "nico",
-        "email": "nico@gmail.com",
+        "id": 7,
+        "nombre": "user",
+        "email": "user@gmail.com",
         "rol": "BASE"
     },
     {
@@ -26,9 +34,9 @@
     {
         "estado": true,
         "contrasena": "123",
-        "id": 7,
-        "nombre": "user",
-        "email": "user@gmail.com",
+        "id": 5,
+        "nombre": "nico",
+        "email": "nico@gmail.com",
         "rol": "BASE"
     }
 ]

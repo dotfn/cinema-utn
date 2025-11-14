@@ -19,6 +19,27 @@
                 "id": 1,
                 "comentario": null,
                 "estrellas": 5
+            },
+            {
+                "estado": true,
+                "idUsuario": 2,
+                "id": 1,
+                "comentario": "Hola m!\n",
+                "estrellas": 0
+            },
+            {
+                "estado": true,
+                "idUsuario": 2,
+                "id": 1,
+                "comentario": "Hola mundo!",
+                "estrellas": 0
+            },
+            {
+                "estado": true,
+                "idUsuario": 2,
+                "id": 2,
+                "comentario": "Hola mduno! 2",
+                "estrellas": 4
             }
         ],
         "titulo": "El Gran Viaje",
@@ -113,13 +134,22 @@
         "imagenPortada": "data/img/el_nino_cohete.jpg",
         "director": "Rodolfo Nieva",
         "genero": "ACCION",
-        "resenas": [{
-            "estado": true,
-            "idUsuario": 4,
-            "id": 0,
-            "comentario": null,
-            "estrellas": 3
-        }],
+        "resenas": [
+            {
+                "estado": true,
+                "idUsuario": 4,
+                "id": 0,
+                "comentario": null,
+                "estrellas": 3
+            },
+            {
+                "estado": true,
+                "idUsuario": 2,
+                "id": 1,
+                "comentario": "Hola mensaje!!!",
+                "estrellas": 3
+            }
+        ],
         "titulo": "NIÑO COHETE",
         "duracion": 2.4,
         "id": 8,

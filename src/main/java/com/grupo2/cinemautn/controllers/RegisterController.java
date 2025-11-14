@@ -5,6 +5,8 @@ import com.grupo2.cinemautn.models.usuarios.Rol;
 import com.grupo2.cinemautn.service.UsuarioService;
 import com.grupo2.cinemautn.persistence.GestoraUsuariosJSON;
 import java.util.ArrayList;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,11 +27,7 @@ public class RegisterController {
     @FXML private TextField txtCorreo;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-    @FXML private TextField txtTelefono;
-    @FXML private TextField txtDireccion;
     @FXML private CheckBox chkTerms;
-    @FXML private Button btnCrear;
-    @FXML private Button btnCancelar;
     @FXML private Label statusLabel;
     @FXML private ComboBox<Rol> cmbRol; // nuevo
 
@@ -103,7 +101,7 @@ public class RegisterController {
     }
 
     @FXML
-    public void onCancelar(javafx.event.ActionEvent event) throws IOException {
+    public void onCancelar(ActionEvent event) throws IOException {
         // Volver al login
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/login.fxml"));
         Scene loginScene = new Scene(loader.load());
@@ -114,7 +112,7 @@ public class RegisterController {
     }
 
     @FXML
-    public void onBack(javafx.event.ActionEvent event) throws IOException {
+    public void onBack(ActionEvent event) throws IOException {
         onCancelar(event);
     }
 }

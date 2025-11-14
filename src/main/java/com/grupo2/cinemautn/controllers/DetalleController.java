@@ -5,6 +5,7 @@ import com.grupo2.cinemautn.models.resena.Resena;
 import com.grupo2.cinemautn.models.usuarios.Usuario;
 import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.SesionActivaService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -28,33 +29,15 @@ import java.util.ArrayList;
 public class DetalleController {
 
     // Campos enlazados desde detalle.fxml (solo vista, con entrada de reseñas)
-    @FXML
-    private Label lblTitle;
-
-    @FXML
-    private ImageView imgPoster;
-
-    @FXML
-    private Label lblGenero;
-
-    @FXML
-    private Label lblAnio;
-
-    @FXML
-    private Label lblDirector;
-
-    @FXML
-    private Rating ratingPromedio;
-
-    @FXML
-    private VBox reviewsContainer;
-
-    @FXML
-    private Rating inputRating;
-
-    @FXML
-    private TextArea txtComentario;
-
+    @FXML private Label lblTitle;
+    @FXML private ImageView imgPoster;
+    @FXML private Label lblGenero;
+    @FXML private Label lblAnio;
+    @FXML private Label lblDirector;
+    @FXML private Rating ratingPromedio;
+    @FXML private VBox reviewsContainer;
+    @FXML private Rating inputRating;
+    @FXML private TextArea txtComentario;
     // Contenido actual mostrado
     private Contenido contenido;
 
@@ -170,7 +153,7 @@ public class DetalleController {
     }
 
     @FXML
-    public void onCancelar(javafx.event.ActionEvent event) throws IOException {
+    public void onBack(ActionEvent event) throws IOException {
         // Navegar al dashboard
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/dashboard.fxml"));
         Scene mainScene = new Scene(loader.load());
@@ -179,10 +162,5 @@ public class DetalleController {
         stage.setScene(mainScene);
         stage.setTitle("Principal");
         stage.show();
-    }
-
-    @FXML
-    public void onBack(javafx.event.ActionEvent event) throws IOException {
-        onCancelar(event);
     }
 }
