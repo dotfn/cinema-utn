@@ -14,7 +14,6 @@ public abstract class Contenido {
     protected String director;
     protected boolean estado;
     protected List<Resena> resenas;
-    // nuevo atributo
     protected String imagenPortada; // ruta o nombre de la imagen (String)
 
     public Contenido() {
@@ -22,21 +21,6 @@ public abstract class Contenido {
         this.id = contador;
         this.estado = true;
     }
-
-    // constructor adicional que incluye imagenPortada
-    /*
-    public Contenido(String titulo, Genero genero, int anio, String director, String imagenPortada) {
-        contador ++;
-        this.id = contador;
-        this.titulo = titulo;
-        this.genero = genero;
-        this.anio = anio;
-        this.director = director;
-        this.estado = true;
-        this.resenas = resenas;
-        this.imagenPortada = imagenPortada;
-    }
-    */
 
     public Contenido(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas) {
         contador ++;
@@ -49,8 +33,6 @@ public abstract class Contenido {
         this.imagenPortada = imagenPortada;
         this.resenas = resenas;
     }
-
-
 
 
     // setters y getters
@@ -87,7 +69,6 @@ public abstract class Contenido {
     public void setImagenPortada(String imagenPortada) { this.imagenPortada = imagenPortada; }
 
     // metodos
-
     public double promedioResenas() {
         if (resenas.isEmpty()) return 0;
         double total = 0;
