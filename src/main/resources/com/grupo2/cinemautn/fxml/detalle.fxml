@@ -9,8 +9,21 @@
 <BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.grupo2.cinemautn.controllers.DetalleController">
 
-    <!-- Encabezado: Título -->
+    <!-- HEADER -->
     <top>
+        <ToolBar style="-fx-padding:6 12; -fx-background-color:linear-gradient(#ffffff, #e6e6e6);">
+            <Button fx:id="btnBack" text="← Volver" onAction="#onBack" />
+            <Separator orientation="VERTICAL" />
+            <Label text="📝 Registro de Usuario" style="-fx-font-size:16px; -fx-font-weight:bold;" />
+            <Pane HBox.hgrow="ALWAYS" />
+        </ToolBar>
+    </top>
+    <!-- Encabezado: Título -->
+
+
+    <!-- Centro: Imagen y detalles -->
+    <center>
+        <HBox spacing="20.0">
         <Label fx:id="lblTitle" text="Título de la película" BorderPane.alignment="CENTER">
             <font>
                 <Font size="24.0"/>
@@ -19,11 +32,6 @@
                 <Insets top="12" bottom="12"/>
             </BorderPane.margin>
         </Label>
-    </top>
-
-    <!-- Centro: Imagen y detalles -->
-    <center>
-        <HBox spacing="20.0">
             <padding>
                 <Insets top="10" right="20" bottom="10" left="20"/>
             </padding>
