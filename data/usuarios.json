@@ -1,6 +1,22 @@
 [
     {
         "estado": true,
+        "contrasena": "123",
+        "id": 2,
+        "nombre": "mateo 2",
+        "email": "mateom@gmail.com",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
+        "contrasena": "123",
+        "id": 5,
+        "nombre": "nico",
+        "email": "nico@gmail.com",
+        "rol": "BASE"
+    },
+    {
+        "estado": true,
         "contrasena": "admin",
         "id": 1,
         "nombre": "admin",
@@ -13,22 +29,6 @@
         "id": 7,
         "nombre": "user",
         "email": "user@gmail.com",
-        "rol": "PREMIUM"
-    },
-    {
-        "estado": true,
-        "contrasena": "123",
-        "id": 5,
-        "nombre": "nico",
-        "email": "nico@gmail.com",
-        "rol": "BASE"
-    },
-    {
-        "estado": true,
-        "contrasena": "123",
-        "id": 2,
-        "nombre": "mateo 2",
-        "email": "mateom@gmail.com",
         "rol": "BASE"
     }
 ]

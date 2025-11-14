@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,13 +20,10 @@ import java.util.ResourceBundle;
 // Nuevos imports para instanciar Pelicula y Serie
 import com.grupo2.cinemautn.models.contenido.Pelicula;
 import com.grupo2.cinemautn.models.contenido.Serie;
-import com.grupo2.cinemautn.models.contenido.Genero;
 
 // Import adicionales para bindings y carga de imagenes
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.scene.image.Image;
-import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,112 +47,121 @@ public class DashboardController implements Initializable {
     @FXML private Label statusLabel;
 
     // Servicio para acceder a los contenidos
-    private ContenidoService contenidoService = new ContenidoService();
+    private final ContenidoService contenidoService = new ContenidoService();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Configurar columnas
-        colNombre.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue() != null ? cell.getValue().getTitulo() : ""));
-        colDirector.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue() != null ? cell.getValue().getDirector() : ""));
+        // Configurar columnas (comprobaciones nulas por seguridad si el FXML no está correctamente vinculado)
+        if (colNombre != null) {
+            colNombre.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue() != null ? cell.getValue().getTitulo() : ""));
+        }
+        if (colDirector != null) {
+            colDirector.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue() != null ? cell.getValue().getDirector() : ""));
+        }
 
         // Columna Duración: muestra duración para Película o temporadas/episodios para Serie
-        colDuracion.setCellValueFactory(cell -> {
-            Contenido c = cell.getValue();
-            if (c == null) return new SimpleStringProperty("");
-            if (c instanceof Pelicula) {
-                Pelicula p = (Pelicula) c;
-                return new SimpleStringProperty(p.getDuracion() + " h");
-            } else if (c instanceof Serie) {
-                Serie s = (Serie) c;
-                return new SimpleStringProperty(s.getTemporadas() + " T, " + s.getEpisodios() + " ep");
-            }
-            return new SimpleStringProperty("-");
-        });
+        if (colDuracion != null) {
+            colDuracion.setCellValueFactory(cell -> {
+                Contenido c = cell.getValue();
+                return switch (c) {
+                    case null -> new SimpleStringProperty("");
+                    case Pelicula p -> new SimpleStringProperty(p.getDuracion() + " h");
+                    case Serie s -> new SimpleStringProperty(s.getTemporadas() + " T, " + s.getEpisodios() + " ep");
+                    default -> new SimpleStringProperty("-");
+                };
+            });
+        }
 
         // Columna Género
-        colGenero.setCellValueFactory(cell -> {
-            Contenido c = cell.getValue();
-            if (c == null) return new SimpleStringProperty("");
-            return new SimpleStringProperty(c.getGenero() != null ? c.getGenero().name() : "");
-        });
+        if (colGenero != null) {
+            colGenero.setCellValueFactory(cell -> {
+                Contenido c = cell.getValue();
+                if (c == null) return new SimpleStringProperty("");
+                return new SimpleStringProperty(c.getGenero() != null ? c.getGenero().name() : "");
+            });
+        }
 
         // Cargar datos desde el servicio
         List<Contenido> lista = contenidoService.listar();
-        tableView.setItems(FXCollections.observableArrayList(lista));
+        if (tableView != null) tableView.setItems(FXCollections.observableArrayList(lista));
 
         // Listener para selección
-        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
-            showDetails(newSel);
-        });
-
-        // Seleccionar el primer elemento si existe
-        if (!lista.isEmpty()) {
-            tableView.getSelectionModel().select(0);
-            showDetails(lista.get(0));
+        if (tableView != null) {
+            tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> showDetails(newSel));
         }
 
-        statusLabel.setText("Cargados: " + lista.size());
+        // Seleccionar el primer elemento si existe
+        if (!lista.isEmpty() && tableView != null) {
+            tableView.getSelectionModel().select(0);
+            showDetails(lista.getFirst());
+        } else if (!lista.isEmpty()) {
+            // Si no hay tableView, igual mostramos detalles del primero
+            showDetails(lista.getFirst());
+        }
+
+        if (statusLabel != null) statusLabel.setText("Cargados: " + lista.size());
     }
 
     @FXML
     public void filterOnSearch() {
-        String q = searchField.getText();
+        String q = (searchField != null) ? searchField.getText() : null;
         List<Contenido> all = contenidoService.listar();
+        // TODO REVISAR IMPLEMENTAR METODOS PROPIOS
         if (q == null || q.trim().isEmpty()) {
-            tableView.setItems(FXCollections.observableArrayList(all));
-            statusLabel.setText("Cargados: " + all.size());
+            if (tableView != null) tableView.setItems(FXCollections.observableArrayList(all));
+            if (statusLabel != null) statusLabel.setText("Cargados: " + all.size());
             return;
         }
         String ql = q.trim().toLowerCase();
         List<Contenido> filtered = all.stream()
                 .filter(c -> c.getTitulo() != null && c.getTitulo().toLowerCase().contains(ql))
                 .collect(Collectors.toList());
-        tableView.setItems(FXCollections.observableArrayList(filtered));
-        statusLabel.setText("Mostrando: " + filtered.size());
-        if (!filtered.isEmpty()) tableView.getSelectionModel().select(0);
+        if (tableView != null) tableView.setItems(FXCollections.observableArrayList(filtered));
+        if (statusLabel != null) statusLabel.setText("Mostrando: " + filtered.size());
+        if (!filtered.isEmpty() && tableView != null) tableView.getSelectionModel().select(0);
     }
 
     @FXML
     public void onVerDetalles() {
-        Contenido sel = tableView.getSelectionModel().getSelectedItem();
+        Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
         if (sel != null) {
             // actualmente no hay una ventana específica, simplemente actualizar estado
-            statusLabel.setText("Ver detalles: " + sel.getTitulo());
+            if (statusLabel != null) statusLabel.setText("Ver detalles: " + sel.getTitulo());
         }
     }
 
     @FXML
     public void onReproducirTrailer() {
-        Contenido sel = tableView.getSelectionModel().getSelectedItem();
+        Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
         if (sel != null) {
-            statusLabel.setText("Reproducir trailer: " + sel.getTitulo());
+            if (statusLabel != null) statusLabel.setText("Reproducir trailer: " + sel.getTitulo());
         }
     }
 
     @FXML
     public void onEditar() {
-        Contenido sel = tableView.getSelectionModel().getSelectedItem();
-        if (sel != null) statusLabel.setText("Editar: " + sel.getTitulo());
+        Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
+        if (sel != null && statusLabel != null) statusLabel.setText("Editar: " + sel.getTitulo());
     }
 
     @FXML
     public void onEliminar() {
-        Contenido sel = tableView.getSelectionModel().getSelectedItem();
+        Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
         if (sel != null) {
             try {
                 contenidoService.baja(sel.getId());
-                tableView.getItems().remove(sel);
-                statusLabel.setText("Eliminado: " + sel.getTitulo());
+                if (tableView != null) tableView.getItems().remove(sel);
+                if (statusLabel != null) statusLabel.setText("Eliminado: " + sel.getTitulo());
             } catch (Exception e) {
-                statusLabel.setText("Error eliminando: " + e.getMessage());
+                if (statusLabel != null) statusLabel.setText("Error eliminando: " + e.getMessage());
             }
         }
     }
 
     @FXML
     public void onAgregar() {
-        statusLabel.setText("Agregar nuevo contenido (no implementado)");
+        if (statusLabel != null) statusLabel.setText("Agregar nuevo contenido (no implementado)");
     }
 
     @FXML
@@ -168,9 +173,8 @@ public class DashboardController implements Initializable {
         javafx.scene.Parent root = loader.load();
         Object ctrl = loader.getController();
         Usuario logged = SesionActivaService.getInstance().getUsuario();
-        if (ctrl instanceof com.grupo2.cinemautn.controllers.UserProfileController) {
-            ((com.grupo2.cinemautn.controllers.UserProfileController) ctrl).setUser(logged);
-        }
+
+        ((UserProfileController) ctrl).setUser(logged);
 
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -199,27 +203,25 @@ public class DashboardController implements Initializable {
     // Muestra la información del contenido seleccionado en el header
     private void showDetails(Contenido c) {
         if (c == null) {
-            lblTitulo.setText("");
-            lblDirector.setText("");
-            lblRating.setText("-");
-            lblDuracion.setText("-");
-            imgPoster.setImage(null);
+            if (lblTitulo != null) lblTitulo.setText("");
+            if (lblDirector != null) lblDirector.setText("");
+            if (lblRating != null) lblRating.setText("-");
+            if (lblDuracion != null) lblDuracion.setText("-");
+            if (imgPoster != null) imgPoster.setImage(null);
             return;
         }
 
-        lblTitulo.setText(c.getTitulo() != null ? c.getTitulo() : "");
-        lblDirector.setText(c.getDirector() != null ? c.getDirector() : "");
+        if (lblTitulo != null) lblTitulo.setText(c.getTitulo() != null ? c.getTitulo() : "");
+        if (lblDirector != null) lblDirector.setText(c.getDirector() != null ? c.getDirector() : "");
         double prom = c.promedioResenas();
-        lblRating.setText(prom > 0 ? String.format("%.1f", prom) : "-");
+        if (lblRating != null) lblRating.setText(prom > 0 ? String.format("%.1f", prom) : "-");
 
-        if (c instanceof Pelicula) {
-            Pelicula p = (Pelicula) c;
-            lblDuracion.setText(p.getDuracion() + " h");
-        } else if (c instanceof Serie) {
-            Serie s = (Serie) c;
-            lblDuracion.setText(s.getTemporadas() + " T, " + s.getEpisodios() + " ep");
+        if (c instanceof Pelicula p) {
+            if (lblDuracion != null) lblDuracion.setText(p.getDuracion() + " h");
+        } else if (c instanceof Serie s) {
+            if (lblDuracion != null) lblDuracion.setText(s.getTemporadas() + " T, " + s.getEpisodios() + " ep");
         } else {
-            lblDuracion.setText("-");
+            if (lblDuracion != null) lblDuracion.setText("-");
         }
     }
 }

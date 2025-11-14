@@ -17,7 +17,7 @@
         "anio": 2023
     },
     {
-        "estado": true,
+        "estado": false,
         "tipo": "PELICULA",
         "imagenPortada": "poster_sombras_horizonte.jpg",
         "director": "Martín Aguilar",
