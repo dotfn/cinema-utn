@@ -3,8 +3,11 @@ import com.grupo2.cinemautn.models.contenido.Contenido;
 import com.grupo2.cinemautn.models.contenido.Genero;
 import com.grupo2.cinemautn.models.contenido.Pelicula;
 import com.grupo2.cinemautn.models.contenido.Serie;
+import com.grupo2.cinemautn.models.resena.Resena;
 import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.UsuarioService;
+
+import java.util.ArrayList;
 
 
 public class Administrador extends Usuario{
@@ -25,16 +28,16 @@ public class Administrador extends Usuario{
     //gestion de contenido
 
     // overload con imagenPortada para Serie
-    public void crearContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios, String imagenPortada) {
-        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios, imagenPortada);
+    public void crearContenido(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas, int temporadas, int episodios) {
+        Contenido contenido = new Serie(titulo, genero, anio, director, imagenPortada, resenas, temporadas, episodios);
         contenidoService.alta(contenido);
     }
 
 
 
     // overload con imagenPortada para Pelicula
-    public void crearContenido(String titulo, Genero genero, int anio, String director, double duracion, String imagenPortada) {
-        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion, imagenPortada);
+    public void crearContenido(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas, double duracion) {
+        Contenido contenido = new Pelicula(titulo, genero, anio, director, imagenPortada, resenas, duracion);
         contenidoService.alta(contenido);
     }
 
@@ -44,15 +47,15 @@ public class Administrador extends Usuario{
 
 
     // overload modificacion para Serie con imagen
-    public void modificarContenido(String titulo, Genero genero, int anio, String director, int temporadas, int episodios, String imagenPortada) {
-        Contenido contenido = new Serie(titulo, genero, anio, director, temporadas, episodios, imagenPortada);
+    public void modificarContenido(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas, int temporadas, int episodios) {
+        Contenido contenido = new Serie(titulo, genero, anio, director, imagenPortada, resenas, temporadas, episodios);
         contenidoService.modificacion(contenido);
     }
 
 
     // overload modificacion para Pelicula con imagen
-    public void modificarContenido(String titulo, Genero genero, int anio, String director, double duracion, String imagenPortada) {
-        Contenido contenido = new Pelicula(titulo, genero, anio, director, duracion, imagenPortada);
+    public void modificarContenido(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas, double duracion) {
+        Contenido contenido = new Pelicula(titulo, genero, anio, director, imagenPortada, resenas, duracion);
         contenidoService.modificacion(contenido);
     }
 

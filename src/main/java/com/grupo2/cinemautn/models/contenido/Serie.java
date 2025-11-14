@@ -1,5 +1,9 @@
 package com.grupo2.cinemautn.models.contenido;
 
+import com.grupo2.cinemautn.models.resena.Resena;
+
+import java.util.ArrayList;
+
 public class Serie extends Contenido {
     private int temporadas;
     private int episodios;
@@ -7,8 +11,8 @@ public class Serie extends Contenido {
     // constructor
 
     // Constructor que incluye imagenPortada
-    public Serie(String titulo, Genero genero, int anio, String director, int temporadas, int episodios, String imagenPortada) {
-        super(titulo, genero, anio, director, imagenPortada);
+    public Serie(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas, int temporadas, int episodios) {
+        super(titulo, genero, anio, director, imagenPortada, resenas);
         this.temporadas = temporadas;
         this.episodios = episodios;
     }

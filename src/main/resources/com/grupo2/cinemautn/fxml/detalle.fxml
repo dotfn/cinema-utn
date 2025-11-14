@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.grupo2.cinemautn.controllers.DetalleController">
+
+    <!-- Encabezado: Título -->
+    <top>
+        <Label fx:id="lblTitle" text="Título de la película" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="24.0"/>
+            </font>
+            <BorderPane.margin>
+                <Insets top="12" bottom="12"/>
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+    <!-- Centro: Imagen y detalles -->
+    <center>
+        <HBox spacing="20.0">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <children>
+                <ImageView fx:id="imgPoster" fitWidth="220" fitHeight="330" preserveRatio="true" />
+
+                <VBox spacing="12.0">
+                    <children>
+                        <HBox spacing="8.0">
+                            <Label text="Género:" style="-fx-font-weight:bold;"/>
+                            <Label fx:id="lblGenero" text="Género"/>
+                        </HBox>
+
+                        <HBox spacing="8.0">
+                            <Label text="Año:" style="-fx-font-weight:bold;"/>
+                            <Label fx:id="lblAnio" text="2025"/>
+                        </HBox>
+
+                        <HBox spacing="8.0">
+                            <Label text="Director:" style="-fx-font-weight:bold;"/>
+                            <Label fx:id="lblDirector" text="Director"/>
+                        </HBox>
+
+                        <Region/>
+
+                        <HBox spacing="8.0" alignment="CENTER_LEFT">
+                            <Label text="Calificación promedio:" style="-fx-font-weight:bold;"/>
+                            <Rating fx:id="ratingPromedio" partialRating="false" max="5" rating="4.0"/>
+                        </HBox>
+
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </center>
+
+    <!-- Inferior: Sección de reseñas -->
+    <bottom>
+        <VBox spacing="8.0">
+            <padding>
+                <Insets top="8" right="12" bottom="12" left="12"/>
+            </padding>
+            <children>
+                <Label text="Reseñas" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+
+                <ScrollPane fitToWidth="true" prefViewportHeight="220.0">
+                    <content>
+                        <VBox fx:id="reviewsContainer" spacing="10.0">
+
+                            <!-- Ejemplos estáticos de reseñas (sin funcionalidad) -->
+                            <children>
+                                <HBox spacing="10.0" style="-fx-border-color:#e0e0e0; -fx-border-width:0 0 1 0; -fx-padding:8;">
+                                    <children>
+                                        <VBox spacing="4.0">
+                                            <Label text="Usuario1" style="-fx-font-weight:bold;"/>
+                                            <Rating partialRating="false" max="5" rating="5.0"/>
+                                            <Label text="Excelente película, muy recomendable." wrapText="true"/>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <HBox spacing="10.0" style="-fx-border-color:#e0e0e0; -fx-border-width:0 0 1 0; -fx-padding:8;">
+                                    <children>
+                                        <VBox spacing="4.0">
+                                            <Label text="Usuario2" style="-fx-font-weight:bold;"/>
+                                            <Rating partialRating="false" max="5" rating="3.0"/>
+                                            <Label text="Buena, pero con partes lentas." wrapText="true"/>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </bottom>
+
+</BorderPane>

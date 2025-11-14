@@ -74,6 +74,6 @@ public class ContenidoService implements ABMCL<Contenido> {
 
     @Override
     public List<Contenido> listar() {
-        return new ArrayList<>(contenidos.values());
+       return new ArrayList<>(contenidos.values());
     }
 }

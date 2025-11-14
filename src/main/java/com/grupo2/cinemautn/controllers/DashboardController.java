@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 // Nuevos imports para instanciar Pelicula y Serie
@@ -83,7 +84,13 @@ public class DashboardController implements Initializable {
         }
 
         // Cargar datos desde el servicio
-        List<Contenido> lista = contenidoService.listar();
+        List<Contenido> lista = new ArrayList<>();
+        for (Contenido c : contenidoService.listar()) {
+            if (c.isEstado()) { // solo activos
+                lista.add(c);
+            }
+        }
+
         if (tableView != null) tableView.setItems(FXCollections.observableArrayList(lista));
 
         // Listener para selección
@@ -123,12 +130,16 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void onVerDetalles() {
-        Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
-        if (sel != null) {
-            // actualmente no hay una ventana específica, simplemente actualizar estado
-            if (statusLabel != null) statusLabel.setText("Ver detalles: " + sel.getTitulo());
-        }
+    public void onVerDetalles(javafx.event.ActionEvent event) throws IOException {
+
+        // Navegar al dashboard
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/detalle.fxml"));
+        Scene mainScene = new Scene(loader.load());
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(mainScene);
+        stage.setTitle("Detalle de Contenido");
+        stage.show();
     }
 
     @FXML

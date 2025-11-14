@@ -1,5 +1,9 @@
 package com.grupo2.cinemautn.models.contenido;
 
+import com.grupo2.cinemautn.models.resena.Resena;
+
+import java.util.ArrayList;
+
 public class Pelicula extends Contenido {
     //Atributos
     private double duracion; // en horas
@@ -7,8 +11,8 @@ public class Pelicula extends Contenido {
     //Construtor
 
     // Constructor que incluye imagenPortada
-    public Pelicula(String titulo, Genero genero, int anio, String director, double duracion, String imagenPortada) {
-        super(titulo, genero, anio, director, imagenPortada);
+    public Pelicula(String titulo, Genero genero, int anio, String director, String imagenPortada, ArrayList<Resena> resenas, double duracion) {
+        super(titulo, genero, anio, director, imagenPortada, resenas);
         this.duracion = duracion;
     }
 

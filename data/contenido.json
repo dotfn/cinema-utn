@@ -1,6 +1,6 @@
 [
     {
-        "estado": false,
+        "estado": true,
         "tipo": "PELICULA",
         "imagenPortada": "poster_el_gran_viaje.jpg",
         "director": "Lucía Martínez",
@@ -17,9 +17,9 @@
         "anio": 2023
     },
     {
-        "estado": false,
+        "estado": true,
         "tipo": "PELICULA",
-        "imagenPortada": "poster_sombras_horizonte.jpg",
+        "imagenPortada": "data/img/matrix.jpg",
         "director": "Martín Aguilar",
         "genero": "ACCION",
         "resenas": [{
@@ -28,7 +28,7 @@
             "id": 0,
             "estrellas": 4
         }],
-        "titulo": "Sombras del Horizonte",
+        "titulo": "Matrix",
         "duracion": 1.85,
         "id": 4,
         "anio": 2022
@@ -37,7 +37,7 @@
         "estado": true,
         "tipo": "SERIE",
         "temporadas": 0,
-        "imagenPortada": "poster_codigo_fragmentado.jpg",
+        "imagenPortada": "data/img/como_entrenar_a_tu_dragon.jpg",
         "director": "Sofía Rivas",
         "genero": "CIENCIA_FICCION",
         "resenas": [{
@@ -46,7 +46,7 @@
             "id": 0,
             "estrellas": 5
         }],
-        "titulo": "Código Fragmentado",
+        "titulo": "DRAGON",
         "episodios": 0,
         "id": 6,
         "anio": 2024
@@ -54,7 +54,7 @@
     {
         "estado": true,
         "tipo": "PELICULA",
-        "imagenPortada": "poster_la_ultima_torre.jpg",
+        "imagenPortada": "data/img/el_nino_cohete.jpg",
         "director": "Rodolfo Nieva",
         "genero": "ACCION",
         "resenas": [{
@@ -63,7 +63,7 @@
             "id": 0,
             "estrellas": 3
         }],
-        "titulo": "La Última Torre",
+        "titulo": "NIÑO COHETE",
         "duracion": 2.4,
         "id": 8,
         "anio": 2021
