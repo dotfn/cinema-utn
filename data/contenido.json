@@ -5,12 +5,20 @@
         "imagenPortada": "poster_el_gran_viaje.jpg",
         "director": "Lucía Martínez",
         "genero": "ANIMACION",
-        "resenas": [{
-            "estado": true,
-            "idUsuario": 1,
-            "id": 0,
-            "estrellas": 5
-        }],
+        "resenas": [
+            {
+                "estado": true,
+                "idUsuario": 1,
+                "id": 0,
+                "estrellas": 5
+            },
+            {
+                "estado": true,
+                "idUsuario": 7,
+                "id": 1,
+                "estrellas": 5
+            }
+        ],
         "titulo": "El Gran Viaje",
         "duracion": 2.15,
         "id": 2,
@@ -40,12 +48,44 @@
         "imagenPortada": "data/img/como_entrenar_a_tu_dragon.jpg",
         "director": "Sofía Rivas",
         "genero": "CIENCIA_FICCION",
-        "resenas": [{
-            "estado": true,
-            "idUsuario": 3,
-            "id": 0,
-            "estrellas": 5
-        }],
+        "resenas": [
+            {
+                "estado": true,
+                "idUsuario": 3,
+                "id": 0,
+                "estrellas": 5
+            },
+            {
+                "estado": true,
+                "idUsuario": 12,
+                "id": 1,
+                "estrellas": 4
+            },
+            {
+                "estado": true,
+                "idUsuario": 7,
+                "id": 2,
+                "estrellas": 5
+            },
+            {
+                "estado": true,
+                "idUsuario": 18,
+                "id": 3,
+                "estrellas": 3
+            },
+            {
+                "estado": true,
+                "idUsuario": 25,
+                "id": 4,
+                "estrellas": 4
+            },
+            {
+                "estado": true,
+                "idUsuario": 9,
+                "id": 5,
+                "estrellas": 5
+            }
+        ],
         "titulo": "DRAGON",
         "episodios": 0,
         "id": 6,

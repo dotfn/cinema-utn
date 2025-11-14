@@ -12,4 +12,9 @@ module com.grupo2.cinemautn {
     opens com.grupo2.cinemautn.app to javafx.fxml;
     exports com.grupo2.cinemautn.controllers;
     opens com.grupo2.cinemautn.controllers to javafx.fxml;
+
+    // Exportar paquetes de modelos concretos
+    exports com.grupo2.cinemautn.models.contenido;
+    exports com.grupo2.cinemautn.models.resena;
+    exports com.grupo2.cinemautn.models.usuarios;
 }

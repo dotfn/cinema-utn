@@ -14,7 +14,7 @@
         <ToolBar style="-fx-padding:6 12; -fx-background-color:linear-gradient(#ffffff, #e6e6e6);">
             <Button fx:id="btnBack" text="← Volver" onAction="#onBack" />
             <Separator orientation="VERTICAL" />
-            <Label text="📝 Registro de Usuario" style="-fx-font-size:16px; -fx-font-weight:bold;" />
+            <Label text="Detalle de Contenidd" style="-fx-font-size:16px; -fx-font-weight:bold;" />
             <Pane HBox.hgrow="ALWAYS" />
         </ToolBar>
     </top>
@@ -107,6 +107,21 @@
                         </VBox>
                     </content>
                 </ScrollPane>
+
+                <!-- Area para agregar nueva reseña -->
+                <Separator />
+                <Label text="Agregar reseña" style="-fx-font-size:14px; -fx-font-weight:bold;"/>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <Label text="Estrellas:"/>
+                    <Rating fx:id="inputRating" partialRating="false" max="5" rating="0"/>
+                </HBox>
+                <Label text="Comentario:"/>
+                <TextArea fx:id="txtComentario" prefRowCount="3" wrapText="true" />
+                <HBox spacing="8.0" alignment="CENTER_RIGHT">
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <Button text="Agregar" onAction="#onAgregarResena" />
+                </HBox>
+
             </children>
         </VBox>
     </bottom>

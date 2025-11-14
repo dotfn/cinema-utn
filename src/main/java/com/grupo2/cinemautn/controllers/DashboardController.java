@@ -101,10 +101,10 @@ public class DashboardController implements Initializable {
         // Seleccionar el primer elemento si existe
         if (!lista.isEmpty() && tableView != null) {
             tableView.getSelectionModel().select(0);
-            showDetails(lista.getFirst());
+            showDetails(lista.get(0));
         } else if (!lista.isEmpty()) {
             // Si no hay tableView, igual mostramos detalles del primero
-            showDetails(lista.getFirst());
+            showDetails(lista.get(0));
         }
 
         if (statusLabel != null) statusLabel.setText("Cargados: " + lista.size());
@@ -132,9 +132,18 @@ public class DashboardController implements Initializable {
     @FXML
     public void onVerDetalles(javafx.event.ActionEvent event) throws IOException {
 
-        // Navegar al dashboard
+        // Navegar al detalle y pasar el contenido seleccionado
+        Contenido sel = (tableView != null) ? tableView.getSelectionModel().getSelectedItem() : null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/detalle.fxml"));
-        Scene mainScene = new Scene(loader.load());
+        javafx.scene.Parent root = loader.load();
+
+        // Obtener controlador y pasar contenido
+        Object controller = loader.getController();
+        if (controller instanceof DetalleController dc && sel != null) {
+            dc.setContenido(sel);
+        }
+
+        Scene mainScene = new Scene(root);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(mainScene);
