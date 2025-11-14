@@ -112,12 +112,6 @@ public class UserProfileController {
             // Actualizar la sesión activa
             SesionActivaService.getInstance().setUsuario(usuarioActual);
         }
-
-        System.out.println("[MOCK] Datos actualizados:");
-        System.out.println("  - Nombre: " + nombre);
-        System.out.println("  - Correo: " + correo);
-        System.out.println("  - Contraseña: " + contrasena);
-        System.out.println("  - Rol: " + seleccionado);
         setEditable(false);
         updateStatus("Cambios guardados correctamente.");
     }

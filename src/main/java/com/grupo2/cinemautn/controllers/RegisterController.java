@@ -101,7 +101,7 @@ public class RegisterController {
     }
 
     @FXML
-    public void onCancelar(ActionEvent event) throws IOException {
+    public void onBack(ActionEvent event) throws IOException {
         // Volver al login
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/grupo2/cinemautn/fxml/login.fxml"));
         Scene loginScene = new Scene(loader.load());
@@ -111,8 +111,4 @@ public class RegisterController {
         stage.show();
     }
 
-    @FXML
-    public void onBack(ActionEvent event) throws IOException {
-        onCancelar(event);
-    }
 }

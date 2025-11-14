@@ -26,7 +26,7 @@ public class LoginController {
     private final AuthService authService = new AuthService();
 
     @FXML
-    public void onLogin(javafx.event.ActionEvent event) throws IOException {
+    public void onLogin(ActionEvent event) throws IOException {
 
         String email = emailField.getText();
         String pass = passwordField.getText();
