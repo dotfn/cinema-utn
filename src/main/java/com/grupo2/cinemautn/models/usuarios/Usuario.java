@@ -92,6 +92,11 @@ public class Usuario {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(email, usuario.email);
+        return idUsuario == usuario.idUsuario && estado == usuario.estado && Objects.equals(nombre, usuario.nombre) && Objects.equals(email, usuario.email) && Objects.equals(contrasena, usuario.contrasena) && rol == usuario.rol;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idUsuario, nombre, email, contrasena, estado, rol);
     }
 }

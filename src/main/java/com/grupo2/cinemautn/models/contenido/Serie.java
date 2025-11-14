@@ -3,6 +3,7 @@ package com.grupo2.cinemautn.models.contenido;
 import com.grupo2.cinemautn.models.resena.Resena;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Serie extends Contenido {
     private int temporadas;
@@ -27,5 +28,18 @@ public class Serie extends Contenido {
     @Override
     public String toString() {
         return "Serie: " + super.toString() + " - " + temporadas + " temporadas, " + episodios + " episodios";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Serie serie = (Serie) o;
+        return temporadas == serie.temporadas && episodios == serie.episodios;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), temporadas, episodios);
     }
 }

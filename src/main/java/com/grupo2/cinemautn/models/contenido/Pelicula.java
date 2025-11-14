@@ -3,6 +3,7 @@ package com.grupo2.cinemautn.models.contenido;
 import com.grupo2.cinemautn.models.resena.Resena;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pelicula extends Contenido {
     //Atributos
@@ -25,5 +26,18 @@ public class Pelicula extends Contenido {
     @Override
     public String toString() {
         return "Pelicula: " + super.toString() + " - Duración: " + duracion + " horas";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Pelicula pelicula = (Pelicula) o;
+        return Double.compare(duracion, pelicula.duracion) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), duracion);
     }
 }

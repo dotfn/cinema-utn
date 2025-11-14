@@ -8,6 +8,7 @@ import com.grupo2.cinemautn.service.ContenidoService;
 import com.grupo2.cinemautn.service.UsuarioService;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Administrador extends Usuario{
@@ -88,5 +89,18 @@ public class Administrador extends Usuario{
 
     public void listarUsuarios() {
         usuarioService.listar();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Administrador that = (Administrador) o;
+        return Objects.equals(usuarioService, that.usuarioService) && Objects.equals(contenidoService, that.contenidoService);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usuarioService, contenidoService);
     }
 }

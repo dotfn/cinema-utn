@@ -4,6 +4,7 @@ import com.grupo2.cinemautn.models.resena.Resena;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Contenido {
     private static int contador = 0;
@@ -89,4 +90,16 @@ public abstract class Contenido {
 
 
     public void agregarResena(Resena resena) { resenas.add(resena); }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Contenido contenido = (Contenido) o;
+        return id == contenido.id && anio == contenido.anio && estado == contenido.estado && Objects.equals(titulo, contenido.titulo) && genero == contenido.genero && Objects.equals(director, contenido.director) && Objects.equals(resenas, contenido.resenas) && Objects.equals(imagenPortada, contenido.imagenPortada);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titulo, genero, anio, director, estado, resenas, imagenPortada);
+    }
 }
